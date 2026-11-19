@@ -243,9 +243,9 @@ export function OrganizationView({
   return (
     <div className="space-y-4 sm:space-y-5 text-black">
       {/* Organization Governance Card */}
-      <RevealWidget className="glass-panel rounded-3xl p-4 sm:p-5 md:p-6 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
-        <div className="flex items-start gap-3.5 sm:gap-4 min-w-0">
-          <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-[#0F0F0F] text-[#5DD62C] border border-[#5DD62C]/35 inline-flex items-center justify-center shrink-0 shadow-[0_8px_20px_-6px_rgba(15,15,15,0.28)]">
+      <RevealWidget className="glass-panel rounded-[28px] p-5 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+        <div className="flex items-start gap-3.5 min-w-0">
+          <div className="w-11 h-11 rounded-full bg-[#08131F] text-[#E8EFF3] inline-flex items-center justify-center shrink-0 shadow-[0_8px_20px_-6px_rgba(8,19,31,0.3)]">
             <Building2 className="w-5 h-5" />
           </div>
           <div className="min-w-0 space-y-1">
@@ -310,7 +310,7 @@ export function OrganizationView({
             aria-label="Filter employees by department"
             value={deptFilter}
             onChange={(e) => setDeptFilter(e.target.value)}
-            className="min-h-[40px] px-3.5 py-2 rounded-xl bg-[#F8F8F8] border border-[#202020]/12 text-[13px] font-medium text-black focus:outline-none focus:border-[#337418]"
+            className="min-h-[38px] px-4 py-1.5 rounded-full bg-white/50 border border-white/80 text-[13px] font-medium text-[#08131F] focus:outline-none focus:border-[#2E4F6B]"
           >
             <option value="All">All Departments</option>
             {departments.map((d) => (
@@ -323,11 +323,11 @@ export function OrganizationView({
       </div>
 
       {subTab === 'employees' && (
-        <RevealWidget className="glass-panel rounded-3xl overflow-hidden">
+        <RevealWidget className="glass-panel rounded-[28px] overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="bg-[#F8F8F8]/90 text-[12px] font-semibold text-black/70 border-b border-[#202020]/10">
+                <tr className="bg-white/30 text-[12px] font-semibold text-[#08131F]/65 border-b border-white/55">
                   <th className="py-3 px-5">Employee</th>
                   <th className="py-3 px-4">Role & Department</th>
                   <th className="py-3 px-4 text-right">Contacted</th>
@@ -337,12 +337,12 @@ export function OrganizationView({
                   <th className="py-3 px-5 text-right">Action</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#202020]/10 text-[13.5px]">
+              <tbody className="divide-y divide-white/45 text-[13.5px]">
                 {filteredEmployees.map((emp) => (
-                  <tr key={emp.id} className="hover:bg-[#F8F8F8] transition-colors">
+                  <tr key={emp.id} className="hover:bg-white/35 transition-colors">
                     <td className="py-3.5 px-5">
                       <div className="flex items-center gap-3">
-                        <span className="w-9 h-9 rounded-xl bg-[#5DD62C]/22 border border-[#337418]/20 text-[#0F0F0F] text-[12px] font-semibold inline-flex items-center justify-center shrink-0">
+                        <span className="w-9 h-9 rounded-full bg-white/65 border border-white/85 text-[#08131F] text-[12px] font-semibold inline-flex items-center justify-center shrink-0">
                           {getInitials(emp.full_name)}
                         </span>
                         <div className="min-w-0">
@@ -414,7 +414,7 @@ export function OrganizationView({
                   <p className="text-[13px] text-black/75 leading-relaxed">{dept.description}</p>
                 </div>
 
-                <div className="pt-3 border-t border-[#202020]/10 space-y-2 text-[12.5px]">
+                <div className="pt-3 border-t border-white/55 space-y-2 text-[12.5px]">
                   <div className="flex justify-between gap-2">
                     <span className="text-black/60">Department Lead</span>
                     <span className="font-semibold text-black">{dept.head_name || 'Unassigned'}</span>
@@ -467,7 +467,7 @@ export function OrganizationView({
                   <p className="text-[12.5px] text-black/75 leading-relaxed">{role.description}</p>
 
                   {/* Data Access */}
-                  <div className="pt-3 border-t border-[#202020]/10 space-y-2">
+                  <div className="pt-3 border-t border-white/55 space-y-2">
                     <div className="text-[12px] font-semibold text-black/70">Data Access</div>
                     <div className="flex items-center justify-between text-[12.5px]">
                       <span className="text-black">Leads Scope</span>
@@ -515,7 +515,7 @@ export function OrganizationView({
                   </div>
 
                   {/* Modification Capabilities */}
-                  <div className="pt-3 border-t border-[#202020]/10 space-y-2">
+                  <div className="pt-3 border-t border-white/55 space-y-2">
                     <div className="text-[12px] font-semibold text-black/70">
                       Modification Capabilities
                     </div>
@@ -548,7 +548,7 @@ export function OrganizationView({
                   </div>
 
                   {/* Reporting Visibility */}
-                  <div className="pt-3 border-t border-[#202020]/10 space-y-2">
+                  <div className="pt-3 border-t border-white/55 space-y-2">
                     <div className="text-[12px] font-semibold text-black/70">
                       Reporting Visibility
                     </div>
@@ -598,7 +598,7 @@ export function OrganizationView({
               value={empName}
               onChange={(e) => setEmpName(e.target.value)}
               placeholder="e.g. Lucas Meyer"
-              className="w-full min-h-[40px] px-3.5 py-2 rounded-xl bg-[#F8F8F8] border border-[#202020]/10 text-[13.5px] text-black placeholder:text-black/45"
+              className="w-full min-h-[40px] px-3.5 py-2 rounded-xl bg-white/55 border border-white/80 text-[13.5px] text-black placeholder:text-black/45"
             />
           </div>
           <div>
@@ -609,7 +609,7 @@ export function OrganizationView({
               value={empEmail}
               onChange={(e) => setEmpEmail(e.target.value)}
               placeholder="lucas@northlinecommerce.com"
-              className="w-full min-h-[40px] px-3.5 py-2 rounded-xl bg-[#F8F8F8] border border-[#202020]/10 text-[13.5px] text-black placeholder:text-black/45"
+              className="w-full min-h-[40px] px-3.5 py-2 rounded-xl bg-white/55 border border-white/80 text-[13.5px] text-black placeholder:text-black/45"
             />
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -618,7 +618,7 @@ export function OrganizationView({
               <select
                 value={empRoleId}
                 onChange={(e) => setEmpRoleId(e.target.value)}
-                className="w-full min-h-[40px] px-3 py-2 rounded-xl bg-[#F8F8F8] border border-[#202020]/10 text-[13.5px] text-black"
+                className="w-full min-h-[40px] px-3 py-2 rounded-xl bg-white/55 border border-white/80 text-[13.5px] text-black"
               >
                 {roles.map((r) => (
                   <option key={r.id} value={r.id}>
@@ -632,7 +632,7 @@ export function OrganizationView({
               <select
                 value={empDept}
                 onChange={(e) => setEmpDept(e.target.value)}
-                className="w-full min-h-[40px] px-3 py-2 rounded-xl bg-[#F8F8F8] border border-[#202020]/10 text-[13.5px] text-black"
+                className="w-full min-h-[40px] px-3 py-2 rounded-xl bg-white/55 border border-white/80 text-[13.5px] text-black"
               >
                 {departments.map((d) => (
                   <option key={d.id} value={d.id}>
@@ -648,7 +648,7 @@ export function OrganizationView({
               value={empTitle}
               onChange={(e) => setEmpTitle(e.target.value)}
               placeholder="e.g. Performance Account Executive"
-              className="w-full min-h-[40px] px-3.5 py-2 rounded-xl bg-[#F8F8F8] border border-[#202020]/10 text-[13.5px] text-black placeholder:text-black/45"
+              className="w-full min-h-[40px] px-3.5 py-2 rounded-xl bg-white/55 border border-white/80 text-[13.5px] text-black placeholder:text-black/45"
             />
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -659,7 +659,7 @@ export function OrganizationView({
                 min={1}
                 value={empCapacity}
                 onChange={(e) => setEmpCapacity(e.target.value)}
-                className="w-full min-h-[40px] px-3.5 py-2 rounded-xl bg-[#F8F8F8] border border-[#202020]/10 text-[13.5px] text-black tabular-nums"
+                className="w-full min-h-[40px] px-3.5 py-2 rounded-xl bg-white/55 border border-white/80 text-[13.5px] text-black tabular-nums"
               />
             </div>
             <div>
@@ -669,7 +669,7 @@ export function OrganizationView({
                 min={0}
                 value={empQuota}
                 onChange={(e) => setEmpQuota(e.target.value)}
-                className="w-full min-h-[40px] px-3.5 py-2 rounded-xl bg-[#F8F8F8] border border-[#202020]/10 text-[13.5px] text-black tabular-nums"
+                className="w-full min-h-[40px] px-3.5 py-2 rounded-xl bg-white/55 border border-white/80 text-[13.5px] text-black tabular-nums"
               />
             </div>
           </div>
@@ -721,7 +721,7 @@ export function OrganizationView({
                       role: matched?.name || editingEmployee.role,
                     });
                   }}
-                  className="w-full min-h-[40px] px-3 py-2 rounded-xl bg-[#F8F8F8] border border-[#202020]/10 text-[13.5px] text-black"
+                  className="w-full min-h-[40px] px-3 py-2 rounded-xl bg-white/55 border border-white/80 text-[13.5px] text-black"
                 >
                   {roles.map((r) => (
                     <option key={r.id} value={r.id}>
@@ -737,7 +737,7 @@ export function OrganizationView({
                   onChange={(e) =>
                     setEditingEmployee({ ...editingEmployee, status: e.target.value as 'Active' | 'Away' })
                   }
-                  className="w-full min-h-[40px] px-3 py-2 rounded-xl bg-[#F8F8F8] border border-[#202020]/10 text-[13.5px] text-black"
+                  className="w-full min-h-[40px] px-3 py-2 rounded-xl bg-white/55 border border-white/80 text-[13.5px] text-black"
                 >
                   <option value="Active">Active</option>
                   <option value="Away">Away</option>
@@ -751,7 +751,7 @@ export function OrganizationView({
                 onChange={(e) =>
                   setEditingEmployee({ ...editingEmployee, department_id: e.target.value })
                 }
-                className="w-full min-h-[40px] px-3 py-2 rounded-xl bg-[#F8F8F8] border border-[#202020]/10 text-[13.5px] text-black"
+                className="w-full min-h-[40px] px-3 py-2 rounded-xl bg-white/55 border border-white/80 text-[13.5px] text-black"
               >
                 {departments.map((d) => (
                   <option key={d.id} value={d.id}>
@@ -765,7 +765,7 @@ export function OrganizationView({
               <input
                 value={editingEmployee.title}
                 onChange={(e) => setEditingEmployee({ ...editingEmployee, title: e.target.value })}
-                className="w-full min-h-[40px] px-3.5 py-2 rounded-xl bg-[#F8F8F8] border border-[#202020]/10 text-[13.5px] text-black"
+                className="w-full min-h-[40px] px-3.5 py-2 rounded-xl bg-white/55 border border-white/80 text-[13.5px] text-black"
               />
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -778,7 +778,7 @@ export function OrganizationView({
                   onChange={(e) =>
                     setEditingEmployee({ ...editingEmployee, max_capacity: Number(e.target.value) })
                   }
-                  className="w-full min-h-[40px] px-3.5 py-2 rounded-xl bg-[#F8F8F8] border border-[#202020]/10 text-[13.5px] text-black tabular-nums"
+                  className="w-full min-h-[40px] px-3.5 py-2 rounded-xl bg-white/55 border border-white/80 text-[13.5px] text-black tabular-nums"
                 />
               </div>
               <div>
@@ -790,11 +790,11 @@ export function OrganizationView({
                   onChange={(e) =>
                     setEditingEmployee({ ...editingEmployee, monthly_quota: Number(e.target.value) })
                   }
-                  className="w-full min-h-[40px] px-3.5 py-2 rounded-xl bg-[#F8F8F8] border border-[#202020]/10 text-[13.5px] text-black tabular-nums"
+                  className="w-full min-h-[40px] px-3.5 py-2 rounded-xl bg-white/55 border border-white/80 text-[13.5px] text-black tabular-nums"
                 />
               </div>
             </div>
-            <div className="flex items-center justify-between pt-3 border-t border-[#202020]/10">
+            <div className="flex items-center justify-between pt-3 border-t border-[#08131F]/10">
               <GlassButton
                 variant="danger"
                 size="sm"
@@ -835,7 +835,7 @@ export function OrganizationView({
               value={roleName}
               onChange={(e) => setRoleName(e.target.value)}
               placeholder="e.g. Regional Analyst"
-              className="w-full min-h-[40px] px-3.5 py-2 rounded-xl bg-[#F8F8F8] border border-[#202020]/10 text-[13.5px] text-black placeholder:text-black/45"
+              className="w-full min-h-[40px] px-3.5 py-2 rounded-xl bg-white/55 border border-white/80 text-[13.5px] text-black placeholder:text-black/45"
             />
           </div>
           <div>
@@ -845,7 +845,7 @@ export function OrganizationView({
               value={roleDesc}
               onChange={(e) => setRoleDesc(e.target.value)}
               placeholder="Outline responsibilities and visibility boundaries..."
-              className="w-full px-3.5 py-2 rounded-xl bg-[#F8F8F8] border border-[#202020]/10 text-[13.5px] text-black placeholder:text-black/45"
+              className="w-full px-3.5 py-2 rounded-xl bg-white/55 border border-white/80 text-[13.5px] text-black placeholder:text-black/45"
             />
           </div>
 
@@ -863,7 +863,7 @@ export function OrganizationView({
                     },
                   })
                 }
-                className="w-full min-h-[40px] px-3 py-2 rounded-xl bg-[#F8F8F8] border border-[#202020]/10 text-[13.5px] text-black"
+                className="w-full min-h-[40px] px-3 py-2 rounded-xl bg-white/55 border border-white/80 text-[13.5px] text-black"
               >
                 <option value="all">All Organization</option>
                 <option value="department">Department Only</option>
@@ -883,7 +883,7 @@ export function OrganizationView({
                     },
                   })
                 }
-                className="w-full min-h-[40px] px-3 py-2 rounded-xl bg-[#F8F8F8] border border-[#202020]/10 text-[13.5px] text-black"
+                className="w-full min-h-[40px] px-3 py-2 rounded-xl bg-white/55 border border-white/80 text-[13.5px] text-black"
               >
                 <option value="all">All Organization</option>
                 <option value="department">Department Only</option>
@@ -892,7 +892,7 @@ export function OrganizationView({
             </div>
           </div>
 
-          <div className="space-y-2 pt-2 border-t border-[#202020]/10">
+          <div className="space-y-2 pt-2 border-t border-[#08131F]/10">
             <div className="text-[12.5px] font-semibold text-black/70">Capabilities & Reporting</div>
             {(
               [
@@ -926,7 +926,7 @@ export function OrganizationView({
                         });
                       }
                     }}
-                    className="w-4 h-4 accent-[#337418]"
+                    className="w-4 h-4 accent-[#08131F]"
                   />
                   <span>{label}</span>
                 </label>
@@ -966,7 +966,7 @@ export function OrganizationView({
               required
               value={orgForm.name || ''}
               onChange={(e) => setOrgForm({ ...orgForm, name: e.target.value })}
-              className="w-full min-h-[40px] px-3.5 py-2 rounded-xl bg-[#F8F8F8] border border-[#202020]/12 text-[13.5px] text-black"
+              className="w-full min-h-[40px] px-3.5 py-2 rounded-xl bg-white/55 border border-white/80 text-[13.5px] text-black"
             />
           </div>
           <div>
@@ -974,7 +974,7 @@ export function OrganizationView({
             <input
               value={orgForm.industry || ''}
               onChange={(e) => setOrgForm({ ...orgForm, industry: e.target.value })}
-              className="w-full min-h-[40px] px-3.5 py-2 rounded-xl bg-[#F8F8F8] border border-[#202020]/12 text-[13.5px] text-black"
+              className="w-full min-h-[40px] px-3.5 py-2 rounded-xl bg-white/55 border border-white/80 text-[13.5px] text-black"
             />
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -983,7 +983,7 @@ export function OrganizationView({
               <input
                 value={orgForm.meta_business_id || ''}
                 onChange={(e) => setOrgForm({ ...orgForm, meta_business_id: e.target.value })}
-                className="w-full min-h-[40px] px-3.5 py-2 rounded-xl bg-[#F8F8F8] border border-[#202020]/12 text-[13.5px] text-black"
+                className="w-full min-h-[40px] px-3.5 py-2 rounded-xl bg-white/55 border border-white/80 text-[13.5px] text-black"
               />
             </div>
             <div>
@@ -995,7 +995,7 @@ export function OrganizationView({
                 onChange={(e) =>
                   setOrgForm({ ...orgForm, sla_target_minutes: Number(e.target.value) })
                 }
-                className="w-full min-h-[40px] px-3.5 py-2 rounded-xl bg-[#F8F8F8] border border-[#202020]/12 text-[13.5px] text-black tabular-nums"
+                className="w-full min-h-[40px] px-3.5 py-2 rounded-xl bg-white/55 border border-white/80 text-[13.5px] text-black tabular-nums"
               />
             </div>
           </div>
@@ -1004,7 +1004,7 @@ export function OrganizationView({
             <input
               value={orgForm.timezone || ''}
               onChange={(e) => setOrgForm({ ...orgForm, timezone: e.target.value })}
-              className="w-full min-h-[40px] px-3.5 py-2 rounded-xl bg-[#F8F8F8] border border-[#202020]/12 text-[13.5px] text-black"
+              className="w-full min-h-[40px] px-3.5 py-2 rounded-xl bg-white/55 border border-white/80 text-[13.5px] text-black"
             />
           </div>
           <div className="flex justify-end gap-2.5 pt-2">
@@ -1033,7 +1033,7 @@ export function OrganizationView({
               value={deptName}
               onChange={(e) => setDeptName(e.target.value)}
               placeholder="e.g. Regional Accounts"
-              className="w-full min-h-[40px] px-3.5 py-2 rounded-xl bg-[#F8F8F8] border border-[#202020]/12 text-[13.5px] text-black placeholder:text-black/45"
+              className="w-full min-h-[40px] px-3.5 py-2 rounded-xl bg-white/55 border border-white/80 text-[13.5px] text-black placeholder:text-black/45"
             />
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -1042,7 +1042,7 @@ export function OrganizationView({
               <select
                 value={deptHead}
                 onChange={(e) => setDeptHead(e.target.value)}
-                className="w-full min-h-[40px] px-3 py-2 rounded-xl bg-[#F8F8F8] border border-[#202020]/12 text-[13.5px] text-black"
+                className="w-full min-h-[40px] px-3 py-2 rounded-xl bg-white/55 border border-white/80 text-[13.5px] text-black"
               >
                 {employees.map((e) => (
                   <option key={e.id} value={e.id}>
@@ -1056,7 +1056,7 @@ export function OrganizationView({
               <select
                 value={deptChannel}
                 onChange={(e) => setDeptChannel(e.target.value as QueryChannel)}
-                className="w-full min-h-[40px] px-3 py-2 rounded-xl bg-[#F8F8F8] border border-[#202020]/12 text-[13.5px] text-black"
+                className="w-full min-h-[40px] px-3 py-2 rounded-xl bg-white/55 border border-white/80 text-[13.5px] text-black"
               >
                 <option value="Lead Form">Lead Form</option>
                 <option value="Instagram DM">Instagram DM</option>
@@ -1074,7 +1074,7 @@ export function OrganizationView({
               value={deptDesc}
               onChange={(e) => setDeptDesc(e.target.value)}
               placeholder="Outline this department's Meta Ads or CRM focus..."
-              className="w-full px-3.5 py-2.5 rounded-xl bg-[#F8F8F8] border border-[#202020]/12 text-[13.5px] text-black placeholder:text-black/45"
+              className="w-full px-3.5 py-2.5 rounded-xl bg-white/55 border border-white/80 text-[13.5px] text-black placeholder:text-black/45"
             />
           </div>
           <div className="flex justify-end gap-2.5 pt-2">

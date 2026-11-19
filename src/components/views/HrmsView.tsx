@@ -167,61 +167,52 @@ export function HrmsView({
 
   return (
     <div className="space-y-4 sm:space-y-5 text-black">
-      {/* HRMS Summary KPI Strip */}
-      <section aria-label="HRMS Overview Metrics" className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-3.5 sm:gap-4">
-        {[
-          {
-            label: 'Present Today',
-            value: `${m?.presentToday || 0} / ${m?.totalHeadcount || employees.length}`,
-            detail: 'Checked in across On-Site & Remote',
-            icon: Clock,
-          },
-          {
-            label: 'Pending Leave Requests',
-            value: String(m?.pendingLeaves || 0),
-            detail: 'Awaiting Manager or HR review',
-            icon: CalendarDays,
-          },
-          {
-            label: 'Monthly Payroll Total',
-            value: permissions.reporting.viewFinancialRoas
-              ? formatCurrency(m?.monthlyPayrollTotal || 0)
-              : 'Restricted',
-            detail: 'Base salary + 5% CRM won deal commission',
-            icon: Wallet,
-          },
-          {
-            label: 'Avg Performance Rating',
-            value: `${m?.avgRating || 4.7} / 5.0`,
-            detail: 'Combined attendance & CRM attainment',
-            icon: Award,
-          },
-        ].map((kpi, idx) => {
-          const Icon = kpi.icon;
-          return (
+      {/* Unified HRMS Crystal-Clear Metric Strip */}
+      <RevealWidget ariaLabel="HRMS Overview Metrics" className="glass-panel rounded-[28px] overflow-hidden">
+        <div className="grid grid-cols-2 xl:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-white/55">
+          {[
+            {
+              label: 'Present Today',
+              value: `${m?.presentToday || 0} / ${m?.totalHeadcount || employees.length}`,
+              detail: 'On-Site & Remote',
+            },
+            {
+              label: 'Pending Leaves',
+              value: String(m?.pendingLeaves || 0),
+              detail: 'Awaiting review',
+            },
+            {
+              label: 'Monthly Payroll',
+              value: permissions.reporting.viewFinancialRoas
+                ? formatCurrency(m?.monthlyPayrollTotal || 0)
+                : 'Restricted',
+              detail: 'Base + 5% CRM commission',
+            },
+            {
+              label: 'Avg Rating',
+              value: `${m?.avgRating || 4.7} / 5.0`,
+              detail: 'Attendance & quota',
+            },
+          ].map((kpi, idx) => (
             <motion.div
               key={kpi.label}
-              initial={{ opacity: 0, y: 10, scale: 0.97 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{ type: 'spring', stiffness: 360, damping: 28, delay: idx * 0.04 }}
-              whileHover={{ y: -2 }}
-              className="glass-panel rounded-3xl p-4 sm:p-5 flex flex-col justify-between gap-2.5"
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.24, delay: idx * 0.03 }}
+              className="px-5 py-4 flex flex-col justify-between gap-1.5"
             >
-              <div className="flex items-center justify-between gap-2">
-                <span className="text-[13px] font-medium text-black/70">{kpi.label}</span>
-                <Icon className="w-4 h-4 text-black/60 shrink-0" />
-              </div>
-              <div className="text-[26px] font-semibold tracking-tight text-black tabular-nums leading-none">
+              <span className="text-[12px] font-medium text-[#08131F]/60">{kpi.label}</span>
+              <div className="text-[24px] font-semibold tracking-tight text-[#08131F] tabular-nums leading-none">
                 {kpi.value}
               </div>
-              <p className="text-[12px] text-black/65 truncate">{kpi.detail}</p>
+              <p className="text-[11.5px] text-[#08131F]/55 truncate">{kpi.detail}</p>
             </motion.div>
-          );
-        })}
-      </section>
+          ))}
+        </div>
+      </RevealWidget>
 
       {/* HRMS Sub-Tab Bar & Contextual Actions */}
-      <RevealWidget className="glass-panel rounded-3xl p-3.5 sm:p-4 md:px-5 flex flex-wrap items-center justify-between gap-3">
+      <RevealWidget className="glass-panel rounded-full p-2.5 sm:px-4 flex flex-wrap items-center justify-between gap-3">
         <SegmentedControl
           layoutId="hrms-subtab-control"
           ariaLabel="HRMS Sections"
@@ -279,7 +270,7 @@ export function HrmsView({
                 aria-label="Select employee for clock action"
                 value={clockEmployeeId}
                 onChange={(e) => setClockEmployeeId(e.target.value)}
-                className="min-h-[40px] px-3 py-2 rounded-xl bg-[#F8F8F8] border border-[#202020]/12 text-[13px] font-medium text-black"
+                className="min-h-[40px] px-3 py-2 rounded-xl bg-white/55 border border-white/80 text-[13px] font-medium text-black"
               >
                 {employees.map((emp) => (
                   <option key={emp.id} value={emp.id}>
@@ -292,7 +283,7 @@ export function HrmsView({
                 aria-label="Work mode"
                 value={clockMode}
                 onChange={(e) => setClockMode(e.target.value as 'On-Site' | 'Remote' | 'Hybrid')}
-                className="min-h-[40px] px-3 py-2 rounded-xl bg-[#F8F8F8] border border-[#202020]/12 text-[13px] font-medium text-black"
+                className="min-h-[40px] px-3 py-2 rounded-xl bg-white/55 border border-white/80 text-[13px] font-medium text-black"
               >
                 <option value="On-Site">On-Site</option>
                 <option value="Hybrid">Hybrid</option>
@@ -334,11 +325,11 @@ export function HrmsView({
             </div>
           </RevealWidget>
 
-          <RevealWidget delay={0.06} className="glass-panel rounded-3xl overflow-hidden">
+          <RevealWidget delay={0.05} className="glass-panel rounded-[28px] overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full text-left border-collapse">
                 <thead>
-                  <tr className="bg-[#F8F8F8]/90 text-[12px] font-semibold text-black/70 border-b border-[#202020]/10">
+                  <tr className="bg-white/30 text-[12px] font-semibold text-[#08131F]/65 border-b border-white/55">
                     <th className="py-3 px-5">Employee</th>
                     <th className="py-3 px-4">Work Mode</th>
                     <th className="py-3 px-4">Status</th>
@@ -347,9 +338,9 @@ export function HrmsView({
                     <th className="py-3 px-5 text-right">Hours</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-[#202020]/10 text-[13.5px]">
+                <tbody className="divide-y divide-white/45 text-[13.5px]">
                   {filteredAttendance.map((att) => (
-                    <tr key={att.id} className="hover:bg-[#F8F8F8] transition-colors">
+                    <tr key={att.id} className="hover:bg-white/35 transition-colors">
                       <td className="py-3.5 px-5">
                         <div className="font-semibold text-black">{att.employee_name}</div>
                         <div className="text-[12px] text-black/65">
@@ -378,8 +369,8 @@ export function HrmsView({
 
       {/* Leave & Time Off */}
       {subTab === 'leaves' && (
-        <RevealWidget className="glass-panel rounded-3xl overflow-hidden">
-          <div className="divide-y divide-[#202020]/10">
+        <RevealWidget className="glass-panel rounded-[28px] overflow-hidden">
+          <div className="divide-y divide-white/45">
             {filteredLeaves.map((lv) => (
               <div
                 key={lv.id}
@@ -438,7 +429,7 @@ export function HrmsView({
             <div className="overflow-x-auto">
               <table className="w-full text-left border-collapse">
                 <thead>
-                  <tr className="bg-[#F8F8F8]/90 text-[12px] font-semibold text-black/70 border-b border-[#202020]/10">
+                  <tr className="bg-white/30 text-[12px] font-semibold text-[#08131F]/65 border-b border-white/55">
                     <th className="py-3 px-5">Employee</th>
                     <th className="py-3 px-4">Pay Period</th>
                     <th className="py-3 px-4 text-right">Base Salary</th>
@@ -448,9 +439,9 @@ export function HrmsView({
                     <th className="py-3 px-5 text-right">Status</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-[#202020]/10 text-[13.5px]">
+                <tbody className="divide-y divide-white/45 text-[13.5px]">
                   {filteredPayroll.map((pay) => (
-                    <tr key={pay.id} className="hover:bg-[#F8F8F8] transition-colors">
+                    <tr key={pay.id} className="hover:bg-white/35 transition-colors">
                       <td className="py-3.5 px-5">
                         <div className="font-semibold text-black">{pay.employee_name}</div>
                         <div className="text-[12px] text-black/65">
@@ -511,7 +502,7 @@ export function HrmsView({
                 <p className="text-[13px] text-black/80 leading-relaxed">{rev.summary}</p>
               </div>
 
-              <div className="pt-3 border-t border-[#202020]/10 flex items-center justify-between text-[12px] text-black/70 tabular-nums">
+              <div className="pt-3 border-t border-white/55 flex items-center justify-between text-[12px] text-[#08131F]/65 tabular-nums">
                 <span>Attendance {rev.attendance_score}%</span>
                 <span>CRM Quota {rev.crm_attainment_pct}%</span>
               </div>
@@ -533,7 +524,7 @@ export function HrmsView({
             <select
               value={leaveEmpId}
               onChange={(e) => setLeaveEmpId(e.target.value)}
-              className="w-full min-h-[40px] px-3 py-2 rounded-xl bg-[#F8F8F8] border border-[#202020]/12 text-[13.5px] text-black"
+              className="w-full min-h-[40px] px-3 py-2 rounded-xl bg-white/55 border border-white/80 text-[13.5px] text-black"
             >
               {employees.map((e) => (
                 <option key={e.id} value={e.id}>
@@ -549,7 +540,7 @@ export function HrmsView({
               onChange={(e) =>
                 setLeaveType(e.target.value as 'Annual' | 'Sick' | 'Personal' | 'Parental')
               }
-              className="w-full min-h-[40px] px-3 py-2 rounded-xl bg-[#F8F8F8] border border-[#202020]/12 text-[13.5px] text-black"
+              className="w-full min-h-[40px] px-3 py-2 rounded-xl bg-white/55 border border-white/80 text-[13.5px] text-black"
             >
               <option value="Annual">Annual</option>
               <option value="Sick">Sick</option>
@@ -565,7 +556,7 @@ export function HrmsView({
                 required
                 value={leaveStart}
                 onChange={(e) => setLeaveStart(e.target.value)}
-                className="w-full min-h-[40px] px-3 py-2 rounded-xl bg-[#F8F8F8] border border-[#202020]/12 text-[13.5px] text-black tabular-nums"
+                className="w-full min-h-[40px] px-3 py-2 rounded-xl bg-white/55 border border-white/80 text-[13.5px] text-black tabular-nums"
               />
             </div>
             <div>
@@ -575,7 +566,7 @@ export function HrmsView({
                 required
                 value={leaveEnd}
                 onChange={(e) => setLeaveEnd(e.target.value)}
-                className="w-full min-h-[40px] px-3 py-2 rounded-xl bg-[#F8F8F8] border border-[#202020]/12 text-[13.5px] text-black tabular-nums"
+                className="w-full min-h-[40px] px-3 py-2 rounded-xl bg-white/55 border border-white/80 text-[13.5px] text-black tabular-nums"
               />
             </div>
           </div>
@@ -587,7 +578,7 @@ export function HrmsView({
               value={leaveReason}
               onChange={(e) => setLeaveReason(e.target.value)}
               placeholder="Brief note for coverage planning..."
-              className="w-full px-3.5 py-2.5 rounded-xl bg-[#F8F8F8] border border-[#202020]/12 text-[13.5px] text-black placeholder:text-black/45"
+              className="w-full px-3.5 py-2.5 rounded-xl bg-white/55 border border-white/80 text-[13.5px] text-black placeholder:text-black/45"
             />
           </div>
           <div className="flex justify-end gap-2.5 pt-2">
@@ -619,7 +610,7 @@ export function HrmsView({
             <select
               value={revEmpId}
               onChange={(e) => setRevEmpId(e.target.value)}
-              className="w-full min-h-[40px] px-3 py-2 rounded-xl bg-[#F8F8F8] border border-[#202020]/12 text-[13.5px] text-black"
+              className="w-full min-h-[40px] px-3 py-2 rounded-xl bg-white/55 border border-white/80 text-[13.5px] text-black"
             >
               {employees.map((e) => (
                 <option key={e.id} value={e.id}>
@@ -634,7 +625,7 @@ export function HrmsView({
               <input
                 value={revCycle}
                 onChange={(e) => setRevCycle(e.target.value)}
-                className="w-full min-h-[40px] px-3 py-2 rounded-xl bg-[#F8F8F8] border border-[#202020]/12 text-[13.5px] text-black"
+                className="w-full min-h-[40px] px-3 py-2 rounded-xl bg-white/55 border border-white/80 text-[13.5px] text-black"
               />
             </div>
             <div>
@@ -646,7 +637,7 @@ export function HrmsView({
                 max="5"
                 value={revRating}
                 onChange={(e) => setRevRating(e.target.value)}
-                className="w-full min-h-[40px] px-3 py-2 rounded-xl bg-[#F8F8F8] border border-[#202020]/12 text-[13.5px] text-black tabular-nums"
+                className="w-full min-h-[40px] px-3 py-2 rounded-xl bg-white/55 border border-white/80 text-[13.5px] text-black tabular-nums"
               />
             </div>
             <div>
@@ -656,7 +647,7 @@ export function HrmsView({
                 min="0"
                 value={revAttainment}
                 onChange={(e) => setRevAttainment(e.target.value)}
-                className="w-full min-h-[40px] px-3 py-2 rounded-xl bg-[#F8F8F8] border border-[#202020]/12 text-[13.5px] text-black tabular-nums"
+                className="w-full min-h-[40px] px-3 py-2 rounded-xl bg-white/55 border border-white/80 text-[13.5px] text-black tabular-nums"
               />
             </div>
           </div>
@@ -668,7 +659,7 @@ export function HrmsView({
               max="100"
               value={revAttendance}
               onChange={(e) => setRevAttendance(e.target.value)}
-              className="w-full min-h-[40px] px-3 py-2 rounded-xl bg-[#F8F8F8] border border-[#202020]/12 text-[13.5px] text-black tabular-nums"
+              className="w-full min-h-[40px] px-3 py-2 rounded-xl bg-white/55 border border-white/80 text-[13.5px] text-black tabular-nums"
             />
           </div>
           <div>
@@ -679,7 +670,7 @@ export function HrmsView({
               value={revSummary}
               onChange={(e) => setRevSummary(e.target.value)}
               placeholder="Summarize key achievements, Meta query responsiveness, and next quarter focus..."
-              className="w-full px-3.5 py-2.5 rounded-xl bg-[#F8F8F8] border border-[#202020]/12 text-[13.5px] text-black placeholder:text-black/45"
+              className="w-full px-3.5 py-2.5 rounded-xl bg-white/55 border border-white/80 text-[13.5px] text-black placeholder:text-black/45"
             />
           </div>
           <div className="flex justify-end gap-2.5 pt-2">

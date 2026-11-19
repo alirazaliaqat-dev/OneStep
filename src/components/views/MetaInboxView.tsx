@@ -229,22 +229,14 @@ export function MetaInboxView({
   return (
     <div className="space-y-4 sm:space-y-5 text-black">
       {/* Omnichannel Command Strip */}
-      <RevealWidget className="glass-panel rounded-3xl p-3.5 sm:p-4 md:px-5 flex flex-col md:flex-row md:items-center justify-between gap-3">
-        <div className="flex flex-wrap items-center gap-3 min-w-0">
-          <SegmentedControl
-            layoutId="meta-subtab-control"
-            ariaLabel="Omnichannel Workspace Views"
-            value={subTab}
-            onChange={handleSetSubTab}
-            options={subTabs}
-          />
-          <span className="text-[12.5px] font-medium text-black/65 whitespace-nowrap">
-            {isConnected ? `Meta · ${metaStatus?.connection?.pageName}` : 'Meta Ready'} ·{' '}
-            {isTikTokConnected
-              ? `TikTok · ${tiktokStatus?.connection?.tiktokHandle}`
-              : 'TikTok Messages Ready'}
-          </span>
-        </div>
+      <RevealWidget className="glass-panel rounded-full p-2.5 sm:px-4 flex flex-wrap items-center justify-between gap-3">
+        <SegmentedControl
+          layoutId="meta-subtab-control"
+          ariaLabel="Omnichannel Workspace Views"
+          value={subTab}
+          onChange={handleSetSubTab}
+          options={subTabs}
+        />
 
         <div className="flex flex-wrap items-center gap-2 shrink-0">
           {permissions.modifications.assignTasks && subTab === 'queries' && (
@@ -375,21 +367,16 @@ export function MetaInboxView({
       )}
 
       {subTab === 'campaigns' && (
-        <RevealWidget className="glass-panel rounded-3xl overflow-hidden">
-          <div className="px-5 py-4 border-b border-[#202020]/10 flex items-center justify-between gap-4">
-            <div>
-              <AppearHeading as="h2" className="text-[16px] font-semibold text-black">
-                Meta & TikTok Ad Campaigns
-              </AppearHeading>
-              <p className="text-[12.5px] text-black/65 mt-0.5">
-                Live spend, lead acquisition cost, and campaign status controls across Meta & TikTok
-              </p>
-            </div>
+        <RevealWidget className="glass-panel rounded-[28px] overflow-hidden">
+          <div className="px-5 py-4 border-b border-white/55 flex items-center justify-between gap-4">
+            <AppearHeading as="h2" className="text-[15.5px] font-semibold text-[#08131F]">
+              Ad Campaigns
+            </AppearHeading>
           </div>
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="bg-[#F8F8F8]/90 text-[12px] font-semibold text-black/70 border-b border-[#202020]/10">
+                <tr className="bg-white/30 text-[12px] font-semibold text-[#08131F]/65 border-b border-white/55">
                   <th className="py-3 px-5">Campaign</th>
                   <th className="py-3 px-4">Objective</th>
                   <th className="py-3 px-4 text-right">Daily Budget</th>
@@ -400,11 +387,11 @@ export function MetaInboxView({
                   <th className="py-3 px-5 text-right">Status</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#202020]/10 text-[13.5px]">
+              <tbody className="divide-y divide-white/45 text-[13.5px]">
                 {campaigns.map((camp) => {
                   const cpl = camp.leads_count > 0 ? Math.round(camp.spend / camp.leads_count) : 0;
                   return (
-                    <tr key={camp.id} className="hover:bg-[#F8F8F8] transition-colors">
+                    <tr key={camp.id} className="hover:bg-white/35 transition-colors">
                       <td className="py-3.5 px-5">
                         <div className="flex items-center gap-2.5">
                           <SourceAppIcon platform={camp.platform} size="sm" />
@@ -461,19 +448,14 @@ export function MetaInboxView({
       )}
 
       {subTab === 'rules' && (
-        <RevealWidget className="glass-panel rounded-3xl overflow-hidden">
-          <div className="px-5 py-4 border-b border-[#202020]/10 flex items-center justify-between gap-4">
-            <div>
-              <AppearHeading as="h2" className="text-[16px] font-semibold text-black">
-                Automated Inquiry Assignment Rules
-              </AppearHeading>
-              <p className="text-[12.5px] text-black/65 mt-0.5">
-                Predefined rules evaluate incoming Facebook, Instagram & TikTok inquiries in priority order
-              </p>
-            </div>
+        <RevealWidget className="glass-panel rounded-[28px] overflow-hidden">
+          <div className="px-5 py-4 border-b border-white/55 flex items-center justify-between gap-4">
+            <AppearHeading as="h2" className="text-[15.5px] font-semibold text-[#08131F]">
+              Auto-Assign Rules
+            </AppearHeading>
           </div>
 
-          <div className="divide-y divide-[#202020]/10">
+          <div className="divide-y divide-white/45">
             {assignmentRules.map((rule) => (
               <div
                 key={rule.id}
@@ -535,7 +517,7 @@ export function MetaInboxView({
                 value={newCustomer}
                 onChange={(e) => setNewCustomer(e.target.value)}
                 placeholder="e.g. Jordan Mercer"
-                className="w-full min-h-[40px] px-3.5 py-2 rounded-xl bg-[#F8F8F8] border border-[#202020]/12 text-[13.5px] text-black placeholder:text-black/45"
+                className="w-full min-h-[40px] px-3.5 py-2 rounded-xl bg-white/55 border border-white/80 text-[13.5px] text-black placeholder:text-black/45"
               />
             </div>
             <div>
@@ -544,7 +526,7 @@ export function MetaInboxView({
                 value={newHandle}
                 onChange={(e) => setNewHandle(e.target.value)}
                 placeholder="@jordan.studio"
-                className="w-full min-h-[40px] px-3.5 py-2 rounded-xl bg-[#F8F8F8] border border-[#202020]/12 text-[13.5px] text-black placeholder:text-black/45"
+                className="w-full min-h-[40px] px-3.5 py-2 rounded-xl bg-white/55 border border-white/80 text-[13.5px] text-black placeholder:text-black/45"
               />
             </div>
           </div>
@@ -557,7 +539,7 @@ export function MetaInboxView({
                 value={newEmail}
                 onChange={(e) => setNewEmail(e.target.value)}
                 placeholder="jordan@company.com"
-                className="w-full min-h-[40px] px-3.5 py-2 rounded-xl bg-[#F8F8F8] border border-[#202020]/12 text-[13.5px] text-black placeholder:text-black/45"
+                className="w-full min-h-[40px] px-3.5 py-2 rounded-xl bg-white/55 border border-white/80 text-[13.5px] text-black placeholder:text-black/45"
               />
             </div>
             <div>
@@ -566,7 +548,7 @@ export function MetaInboxView({
                 value={newPhone}
                 onChange={(e) => setNewPhone(e.target.value)}
                 placeholder="+1 (555) 210-8940"
-                className="w-full min-h-[40px] px-3.5 py-2 rounded-xl bg-[#F8F8F8] border border-[#202020]/12 text-[13.5px] text-black placeholder:text-black/45"
+                className="w-full min-h-[40px] px-3.5 py-2 rounded-xl bg-white/55 border border-white/80 text-[13.5px] text-black placeholder:text-black/45"
               />
             </div>
           </div>
@@ -577,7 +559,7 @@ export function MetaInboxView({
               <select
                 value={newPlatform}
                 onChange={(e) => setNewPlatform(e.target.value as QueryPlatform)}
-                className="w-full min-h-[40px] px-3 py-2 rounded-xl bg-[#F8F8F8] border border-[#202020]/12 text-[13.5px] text-black"
+                className="w-full min-h-[40px] px-3 py-2 rounded-xl bg-white/55 border border-white/80 text-[13.5px] text-black"
               >
                 <option value="Instagram">Instagram</option>
                 <option value="Facebook">Facebook</option>
@@ -589,7 +571,7 @@ export function MetaInboxView({
               <select
                 value={newChannel}
                 onChange={(e) => setNewChannel(e.target.value as QueryChannel)}
-                className="w-full min-h-[40px] px-3 py-2 rounded-xl bg-[#F8F8F8] border border-[#202020]/12 text-[13.5px] text-black"
+                className="w-full min-h-[40px] px-3 py-2 rounded-xl bg-white/55 border border-white/80 text-[13.5px] text-black"
               >
                 <option value="Lead Form">Lead Form</option>
                 <option value="Instagram DM">Instagram DM</option>
@@ -606,7 +588,7 @@ export function MetaInboxView({
             <select
               value={newCampaignId}
               onChange={(e) => setNewCampaignId(e.target.value)}
-              className="w-full min-h-[40px] px-3 py-2 rounded-xl bg-[#F8F8F8] border border-[#202020]/12 text-[13.5px] text-black"
+              className="w-full min-h-[40px] px-3 py-2 rounded-xl bg-white/55 border border-white/80 text-[13.5px] text-black"
             >
               {campaigns.map((c) => (
                 <option key={c.id} value={c.id}>
@@ -624,7 +606,7 @@ export function MetaInboxView({
               <input
                 value={newCreativeName}
                 onChange={(e) => setNewCreativeName(e.target.value)}
-                className="w-full min-h-[40px] px-3.5 py-2 rounded-xl bg-[#F8F8F8] border border-[#202020]/12 text-[13.5px] text-black"
+                className="w-full min-h-[40px] px-3.5 py-2 rounded-xl bg-white/55 border border-white/80 text-[13.5px] text-black"
               />
             </div>
             <div>
@@ -634,7 +616,7 @@ export function MetaInboxView({
               <input
                 value={newCreativeFormat}
                 onChange={(e) => setNewCreativeFormat(e.target.value)}
-                className="w-full min-h-[40px] px-3.5 py-2 rounded-xl bg-[#F8F8F8] border border-[#202020]/12 text-[13.5px] text-black"
+                className="w-full min-h-[40px] px-3.5 py-2 rounded-xl bg-white/55 border border-white/80 text-[13.5px] text-black"
               />
             </div>
           </div>
@@ -646,7 +628,7 @@ export function MetaInboxView({
               value={newSubject}
               onChange={(e) => setNewSubject(e.target.value)}
               placeholder="Pricing inquiry for Q1 rollout"
-              className="w-full min-h-[40px] px-3.5 py-2 rounded-xl bg-[#F8F8F8] border border-[#202020]/12 text-[13.5px] text-black placeholder:text-black/45"
+              className="w-full min-h-[40px] px-3.5 py-2 rounded-xl bg-white/55 border border-white/80 text-[13.5px] text-black placeholder:text-black/45"
             />
           </div>
 
@@ -658,7 +640,7 @@ export function MetaInboxView({
               value={newMessage}
               onChange={(e) => setNewMessage(e.target.value)}
               placeholder="Customer's inquiry message..."
-              className="w-full px-3.5 py-2.5 rounded-xl bg-[#F8F8F8] border border-[#202020]/12 text-[13.5px] text-black placeholder:text-black/45"
+              className="w-full px-3.5 py-2.5 rounded-xl bg-white/55 border border-white/80 text-[13.5px] text-black placeholder:text-black/45"
             />
           </div>
 
@@ -667,7 +649,7 @@ export function MetaInboxView({
               type="checkbox"
               checked={autoAssignOnCreate}
               onChange={(e) => setAutoAssignOnCreate(e.target.checked)}
-              className="w-4 h-4 accent-[#337418]"
+              className="w-4 h-4 accent-[#08131F]"
             />
             <span>Automatically assign to sales agent via active routing rules</span>
           </label>
@@ -698,7 +680,7 @@ export function MetaInboxView({
               value={ruleName}
               onChange={(e) => setRuleName(e.target.value)}
               placeholder="e.g. TikTok DMs → Inbound Team"
-              className="w-full min-h-[40px] px-3.5 py-2 rounded-xl bg-[#F8F8F8] border border-[#202020]/12 text-[13.5px] text-black placeholder:text-black/45"
+              className="w-full min-h-[40px] px-3.5 py-2 rounded-xl bg-white/55 border border-white/80 text-[13.5px] text-black placeholder:text-black/45"
             />
           </div>
 
@@ -708,7 +690,7 @@ export function MetaInboxView({
               <select
                 value={ruleChannel}
                 onChange={(e) => setRuleChannel(e.target.value as 'Any' | QueryChannel)}
-                className="w-full min-h-[40px] px-3 py-2 rounded-xl bg-[#F8F8F8] border border-[#202020]/12 text-[13.5px] text-black"
+                className="w-full min-h-[40px] px-3 py-2 rounded-xl bg-white/55 border border-white/80 text-[13.5px] text-black"
               >
                 <option value="Any">Any Channel</option>
                 <option value="Lead Form">Lead Form</option>
@@ -724,7 +706,7 @@ export function MetaInboxView({
               <select
                 value={rulePlatform}
                 onChange={(e) => setRulePlatform(e.target.value as 'Any' | QueryPlatform)}
-                className="w-full min-h-[40px] px-3 py-2 rounded-xl bg-[#F8F8F8] border border-[#202020]/12 text-[13.5px] text-black"
+                className="w-full min-h-[40px] px-3 py-2 rounded-xl bg-white/55 border border-white/80 text-[13.5px] text-black"
               >
                 <option value="Any">Any Platform</option>
                 <option value="Facebook">Facebook</option>
@@ -739,7 +721,7 @@ export function MetaInboxView({
             <select
               value={ruleCampaignId}
               onChange={(e) => setRuleCampaignId(e.target.value)}
-              className="w-full min-h-[40px] px-3 py-2 rounded-xl bg-[#F8F8F8] border border-[#202020]/12 text-[13.5px] text-black"
+              className="w-full min-h-[40px] px-3 py-2 rounded-xl bg-white/55 border border-white/80 text-[13.5px] text-black"
             >
               <option value="Any">All Campaigns</option>
               {campaigns.map((c) => (
@@ -758,7 +740,7 @@ export function MetaInboxView({
                 onChange={(e) =>
                   setRuleStrategy(e.target.value as 'least_loaded' | 'specific_agent' | 'round_robin')
                 }
-                className="w-full min-h-[40px] px-3 py-2 rounded-xl bg-[#F8F8F8] border border-[#202020]/12 text-[13.5px] text-black"
+                className="w-full min-h-[40px] px-3 py-2 rounded-xl bg-white/55 border border-white/80 text-[13.5px] text-black"
               >
                 <option value="least_loaded">Least Loaded Agent</option>
                 <option value="round_robin">Round Robin</option>
@@ -770,7 +752,7 @@ export function MetaInboxView({
               <select
                 value={rulePriority}
                 onChange={(e) => setRulePriority(e.target.value)}
-                className="w-full min-h-[40px] px-3 py-2 rounded-xl bg-[#F8F8F8] border border-[#202020]/12 text-[13.5px] text-black"
+                className="w-full min-h-[40px] px-3 py-2 rounded-xl bg-white/55 border border-white/80 text-[13.5px] text-black"
               >
                 <option value="Keep">Keep Incoming</option>
                 <option value="Urgent">Urgent</option>
@@ -786,7 +768,7 @@ export function MetaInboxView({
               <select
                 value={ruleAgentId}
                 onChange={(e) => setRuleAgentId(e.target.value)}
-                className="w-full min-h-[40px] px-3 py-2 rounded-xl bg-[#F8F8F8] border border-[#202020]/12 text-[13.5px] text-black"
+                className="w-full min-h-[40px] px-3 py-2 rounded-xl bg-white/55 border border-white/80 text-[13.5px] text-black"
               >
                 {employees.map((e) => (
                   <option key={e.id} value={e.id}>

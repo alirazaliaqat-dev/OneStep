@@ -449,12 +449,12 @@ export default function App() {
 
   return (
     <MotionConfig reducedMotion="user">
-      <div className="relative min-h-screen ambient-mesh text-black flex overflow-x-clip">
-        {/* Refractive color-depth orbs behind Liquid Glass panels */}
+      <div className="relative min-h-screen ambient-mesh text-[#08131F] flex overflow-x-clip">
+        {/* Soft Arctic mist clouds behind Crystal-Clear Liquid Glass panels */}
         <div aria-hidden="true" className="pointer-events-none fixed inset-0 overflow-hidden z-0">
-          <div className="ambient-orb-1 absolute -top-24 -left-16 w-[460px] h-[460px] rounded-full blur-3xl" />
-          <div className="ambient-orb-2 absolute top-[18%] right-[-8%] w-[520px] h-[520px] rounded-full blur-3xl" />
-          <div className="ambient-orb-3 absolute bottom-[-18%] left-[26%] w-[540px] h-[540px] rounded-full blur-3xl" />
+          <div className="ambient-orb-1 absolute -top-28 -left-20 w-[560px] h-[560px] rounded-full blur-3xl" />
+          <div className="ambient-orb-2 absolute top-[8%] right-[-6%] w-[520px] h-[520px] rounded-full blur-3xl" />
+          <div className="ambient-orb-3 absolute bottom-[-20%] left-[22%] w-[620px] h-[620px] rounded-full blur-3xl" />
         </div>
 
         <div className="relative z-10 flex w-full min-w-0">
@@ -800,29 +800,25 @@ export default function App() {
             )}
           </main>
 
-          {/* Desktop Sticky Liquid Glass Footer */}
+          {/* Quiet Sticky Liquid Glass Footer */}
           <footer
-            aria-label="Workspace Sticky Footer"
+            aria-label="Workspace Footer"
             className="hidden lg:flex sticky bottom-0 z-30 px-6 pb-3 pt-1 pointer-events-none"
           >
-            <div className="pointer-events-auto w-full max-w-[1400px] mx-auto glass-sheet rounded-2xl px-4 py-2 flex items-center justify-between gap-4 text-[12px] text-black">
-              <div className="flex items-center gap-2.5 min-w-0">
-                <span className="font-semibold text-black truncate">
-                  {organization?.name || 'Clearline CRM'}
+            <div className="pointer-events-auto w-full max-w-[1360px] mx-auto glass-panel rounded-full px-5 py-1.5 flex items-center justify-between gap-4 text-[12px] text-[#08131F]">
+              <div className="flex items-center gap-2 min-w-0">
+                <span className="font-semibold text-[#08131F] truncate">
+                  {organization?.name || 'Clearline'}
                 </span>
-                <span className="text-black/45">·</span>
-                <span className="text-black/70 truncate">
-                  {activeRole.name} · {openQueriesCount} open omnichannel chats ·{' '}
-                  {metaStatus?.connection?.status === 'Connected' ? 'Meta Live' : 'Meta Ready'} ·{' '}
-                  {tiktokStatus?.connection?.status === 'Connected' ? 'TikTok Live' : 'TikTok Ready'}
-                </span>
+                <span className="text-[#08131F]/35">·</span>
+                <span className="text-[#08131F]/65 truncate">{activeRole.name}</span>
               </div>
 
-              <div className="flex items-center gap-1.5 shrink-0">
+              <div className="flex items-center gap-1 shrink-0">
                 {(
                   [
                     ['overview', 'Overview'],
-                    ['meta', 'Chats'],
+                    ['meta', 'Inbox'],
                     ['pipeline', 'Pipeline'],
                     ['hrms', 'HRMS'],
                   ] as const
@@ -836,10 +832,10 @@ export default function App() {
                         triggerHaptic('selection');
                         handleNavigateSection(tabKey);
                       }}
-                      className={`px-3 py-1 rounded-xl text-[12px] font-medium whitespace-nowrap shrink-0 cursor-pointer transition-colors ${
+                      className={`px-3 py-1 rounded-full text-[12px] font-medium whitespace-nowrap shrink-0 cursor-pointer transition-colors ${
                         active
-                          ? 'bg-[#0F0F0F] text-[#F8F8F8] border border-[#5DD62C]/35'
-                          : 'text-black/75 hover:text-black hover:bg-[#F8F8F8]'
+                          ? 'bg-[#08131F]/92 text-[#E8EFF3]'
+                          : 'text-[#08131F]/70 hover:text-[#08131F] hover:bg-white/50'
                       }`}
                     >
                       {label}
@@ -890,7 +886,7 @@ export default function App() {
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: 8, scale: 0.96 }}
                 transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-                className="pointer-events-auto glass-dark-anchor text-[#F8F8F8] rounded-2xl px-4 py-3 flex items-center gap-3 max-w-sm"
+                className="pointer-events-auto glass-dark-anchor text-[#E8EFF3] rounded-full px-5 py-2.5 flex items-center gap-3 max-w-sm"
               >
                 <span className="text-[13px] font-medium leading-snug">{toast}</span>
                 <button
@@ -900,7 +896,7 @@ export default function App() {
                     triggerHaptic('light');
                     setToast(null);
                   }}
-                  className="text-[#5DD62C] hover:text-[#F8F8F8] whitespace-nowrap shrink-0 cursor-pointer p-1"
+                  className="text-[#A9BDC9] hover:text-[#E8EFF3] whitespace-nowrap shrink-0 cursor-pointer p-1"
                 >
                   <X className="w-4 h-4" />
                 </button>

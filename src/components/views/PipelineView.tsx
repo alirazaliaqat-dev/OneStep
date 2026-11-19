@@ -112,7 +112,7 @@ export function PipelineView({
   return (
     <div className="space-y-4 sm:space-y-5 text-black">
       {/* Toolbar */}
-      <RevealWidget className="glass-panel rounded-3xl p-3.5 sm:p-4 md:px-5 flex flex-wrap items-center justify-between gap-3">
+      <RevealWidget className="glass-panel rounded-full p-2.5 sm:px-4 flex flex-wrap items-center justify-between gap-3">
         <SegmentedControl
           layoutId="crm-view-mode"
           ariaLabel="CRM Pipeline View Mode"
@@ -154,57 +154,57 @@ export function PipelineView({
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 transition={{ type: 'spring', stiffness: 320, damping: 28, delay: colIdx * 0.05 }}
                 className={`${
-                  stageFilter === 'All' ? 'w-[84vw] max-w-[290px] sm:w-[280px] shrink-0' : 'w-full max-w-xl'
-                } snap-start glass-panel rounded-3xl p-4 flex flex-col gap-3`}
+                  stageFilter === 'All' ? 'w-[84vw] max-w-[290px] sm:w-[276px] shrink-0' : 'w-full max-w-xl'
+                } snap-start glass-panel rounded-[26px] p-4 flex flex-col gap-3`}
               >
-                <div className="flex items-center justify-between gap-2 pb-2.5 border-b border-[#202020]/10">
+                <div className="flex items-center justify-between gap-2 pb-2.5 border-b border-white/55">
                   <div className="flex items-center gap-2 min-w-0">
-                    <AppearHeading as="h2" className="text-[14px] font-semibold text-black truncate">
+                    <AppearHeading as="h2" className="text-[14px] font-semibold text-[#08131F] truncate">
                       {colStage}
                     </AppearHeading>
-                    <span className="text-[12px] font-medium text-black/55 tabular-nums shrink-0">
+                    <span className="text-[12px] font-medium text-[#08131F]/50 tabular-nums shrink-0">
                       {colLeads.length}
                     </span>
                   </div>
-                  <span className="text-[12.5px] font-semibold text-black/75 tabular-nums shrink-0">
+                  <span className="text-[12.5px] font-semibold text-[#2E4F6B] tabular-nums shrink-0">
                     {formatCurrency(colTotal)}
                   </span>
                 </div>
 
                 {colLeads.length === 0 ? (
-                  <p className="text-[12.5px] text-black/55 py-8 text-center">No deals in stage</p>
+                  <p className="text-[12.5px] text-[#08131F]/50 py-8 text-center">Empty</p>
                 ) : (
-                  <div className="space-y-3">
+                  <div className="space-y-2.5">
                     {colLeads.map((lead, cardIdx) => (
                       <motion.article
                         key={lead.id}
-                        initial={{ opacity: 0, y: 8 }}
+                        initial={{ opacity: 0, y: 6 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.22, delay: cardIdx * 0.04 }}
-                        className="rounded-2xl bg-white/95 border border-[#202020]/10 p-3.5 space-y-2.5 overflow-hidden shadow-[0_4px_12px_-6px_rgba(15,15,15,0.08)]"
+                        transition={{ duration: 0.2, delay: cardIdx * 0.03 }}
+                        className="rounded-2xl bg-white/52 backdrop-blur-md border border-white/80 p-3.5 space-y-2.5 overflow-hidden shadow-[inset_0_1px_0_rgba(255,255,255,0.92)]"
                       >
                         <div className="flex items-start justify-between gap-2 min-w-0">
                           <div className="min-w-0 flex-1">
-                            <h3 className="text-[13.5px] font-semibold text-black truncate">
+                            <h3 className="text-[13.5px] font-semibold text-[#08131F] truncate">
                               {lead.company}
                             </h3>
-                            <p className="text-[12px] text-black/65 truncate mt-0.5">
+                            <p className="text-[12px] text-[#08131F]/60 truncate mt-0.5">
                               {lead.contact_name}
                             </p>
                           </div>
-                          <span className="text-[13px] font-semibold text-black tabular-nums shrink-0">
+                          <span className="text-[13px] font-semibold text-[#08131F] tabular-nums shrink-0">
                             {formatCurrency(lead.deal_value)}
                           </span>
                         </div>
 
-                        <div className="flex items-center gap-1.5 text-[12px] text-black/75 min-w-0">
+                        <div className="flex items-center gap-1.5 text-[12px] text-[#08131F]/70 min-w-0">
                           <SourceAppIcon channel={lead.source_channel} size="xs" />
                           <span className="truncate">
                             {lead.source_channel} · {lead.owner_name || 'Unassigned'}
                           </span>
                         </div>
 
-                        <div className="flex items-center justify-between gap-2 pt-2 border-t border-[#202020]/10">
+                        <div className="flex items-center justify-between gap-2 pt-2 border-t border-white/55">
                           <GlassButton
                             variant="ghost"
                             size="sm"
@@ -236,11 +236,11 @@ export function PipelineView({
           })}
         </div>
       ) : (
-        <RevealWidget className="glass-panel rounded-3xl overflow-hidden">
+        <RevealWidget className="glass-panel rounded-[28px] overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="bg-[#F8F8F8]/90 text-[12px] font-semibold text-black/70 border-b border-[#202020]/10">
+                <tr className="bg-white/30 text-[12px] font-semibold text-[#08131F]/65 border-b border-white/55">
                   <th className="py-3 px-5">Company & Contact</th>
                   <th className="py-3 px-4">App Source</th>
                   <th className="py-3 px-4">Stage</th>
@@ -250,9 +250,9 @@ export function PipelineView({
                   <th className="py-3 px-5 text-right">Action</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#202020]/10 text-[13.5px]">
+              <tbody className="divide-y divide-white/45 text-[13.5px]">
                 {filteredLeads.map((lead) => (
-                  <tr key={lead.id} className="hover:bg-[#F8F8F8] transition-colors">
+                  <tr key={lead.id} className="hover:bg-white/35 transition-colors">
                     <td className="py-3.5 px-5">
                       <div className="font-semibold text-black">{lead.company}</div>
                       <div className="text-[12px] text-black/65">
@@ -306,7 +306,7 @@ export function PipelineView({
               value={company}
               onChange={(e) => setCompany(e.target.value)}
               placeholder="e.g. Harborview Retail"
-              className="w-full min-h-[40px] px-3.5 py-2 rounded-xl bg-[#F8F8F8] border border-[#202020]/12 text-[13.5px] text-black placeholder:text-black/45 focus:outline-none focus:border-[#337418]"
+              className="w-full min-h-[40px] px-3.5 py-2 rounded-xl bg-white/55 border border-white/80 text-[13.5px] text-black placeholder:text-black/45 focus:outline-none focus:border-[#2E4F6B]"
             />
           </div>
           <div>
@@ -316,7 +316,7 @@ export function PipelineView({
               value={contactName}
               onChange={(e) => setContactName(e.target.value)}
               placeholder="e.g. Maya Brooks"
-              className="w-full min-h-[40px] px-3.5 py-2 rounded-xl bg-[#F8F8F8] border border-[#202020]/12 text-[13.5px] text-black placeholder:text-black/45 focus:outline-none focus:border-[#337418]"
+              className="w-full min-h-[40px] px-3.5 py-2 rounded-xl bg-white/55 border border-white/80 text-[13.5px] text-black placeholder:text-black/45 focus:outline-none focus:border-[#2E4F6B]"
             />
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -327,7 +327,7 @@ export function PipelineView({
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="maya@harborview.com"
-                className="w-full min-h-[40px] px-3.5 py-2 rounded-xl bg-[#F8F8F8] border border-[#202020]/12 text-[13.5px] text-black placeholder:text-black/45 focus:outline-none focus:border-[#337418]"
+                className="w-full min-h-[40px] px-3.5 py-2 rounded-xl bg-white/55 border border-white/80 text-[13.5px] text-black placeholder:text-black/45 focus:outline-none focus:border-[#2E4F6B]"
               />
             </div>
             <div>
@@ -336,7 +336,7 @@ export function PipelineView({
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
                 placeholder="+1 (415) 555-0192"
-                className="w-full min-h-[40px] px-3.5 py-2 rounded-xl bg-[#F8F8F8] border border-[#202020]/12 text-[13.5px] text-black placeholder:text-black/45 focus:outline-none focus:border-[#337418]"
+                className="w-full min-h-[40px] px-3.5 py-2 rounded-xl bg-white/55 border border-white/80 text-[13.5px] text-black placeholder:text-black/45 focus:outline-none focus:border-[#2E4F6B]"
               />
             </div>
           </div>
@@ -348,7 +348,7 @@ export function PipelineView({
                 min={0}
                 value={dealValue}
                 onChange={(e) => setDealValue(e.target.value)}
-                className="w-full min-h-[40px] px-3.5 py-2 rounded-xl bg-[#F8F8F8] border border-[#202020]/12 text-[13.5px] text-black tabular-nums focus:outline-none focus:border-[#337418]"
+                className="w-full min-h-[40px] px-3.5 py-2 rounded-xl bg-white/55 border border-white/80 text-[13.5px] text-black tabular-nums focus:outline-none focus:border-[#2E4F6B]"
               />
             </div>
             <div>
@@ -356,7 +356,7 @@ export function PipelineView({
               <select
                 value={stage}
                 onChange={(e) => setStage(e.target.value as LeadStage)}
-                className="w-full min-h-[40px] px-3 py-2 rounded-xl bg-[#F8F8F8] border border-[#202020]/12 text-[13.5px] text-black focus:outline-none focus:border-[#337418]"
+                className="w-full min-h-[40px] px-3 py-2 rounded-xl bg-white/55 border border-white/80 text-[13.5px] text-black focus:outline-none focus:border-[#2E4F6B]"
               >
                 {PIPELINE_STAGES.map((s) => (
                   <option key={s} value={s}>
@@ -372,7 +372,7 @@ export function PipelineView({
               <select
                 value={ownerId}
                 onChange={(e) => setOwnerId(e.target.value)}
-                className="w-full min-h-[40px] px-3 py-2 rounded-xl bg-[#F8F8F8] border border-[#202020]/12 text-[13.5px] text-black focus:outline-none focus:border-[#337418]"
+                className="w-full min-h-[40px] px-3 py-2 rounded-xl bg-white/55 border border-white/80 text-[13.5px] text-black focus:outline-none focus:border-[#2E4F6B]"
               >
                 {employees.map((emp) => (
                   <option key={emp.id} value={emp.id}>
@@ -386,7 +386,7 @@ export function PipelineView({
               <select
                 value={campaignId}
                 onChange={(e) => setCampaignId(e.target.value)}
-                className="w-full min-h-[40px] px-3 py-2 rounded-xl bg-[#F8F8F8] border border-[#202020]/12 text-[13.5px] text-black focus:outline-none focus:border-[#337418]"
+                className="w-full min-h-[40px] px-3 py-2 rounded-xl bg-white/55 border border-white/80 text-[13.5px] text-black focus:outline-none focus:border-[#2E4F6B]"
               >
                 {campaigns.map((c) => (
                   <option key={c.id} value={c.id}>
@@ -401,7 +401,7 @@ export function PipelineView({
             <select
               value={sourceChannel}
               onChange={(e) => setSourceChannel(e.target.value as QueryChannel)}
-              className="w-full min-h-[40px] px-3 py-2 rounded-xl bg-[#F8F8F8] border border-[#202020]/12 text-[13.5px] text-black focus:outline-none focus:border-[#337418]"
+              className="w-full min-h-[40px] px-3 py-2 rounded-xl bg-white/55 border border-white/80 text-[13.5px] text-black focus:outline-none focus:border-[#2E4F6B]"
             >
               <option value="Lead Form">Facebook · Lead Form</option>
               <option value="Instagram DM">Instagram · DM</option>
@@ -418,7 +418,7 @@ export function PipelineView({
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
               placeholder="Qualification notes, timeline, or contract scope..."
-              className="w-full px-3.5 py-2.5 rounded-xl bg-[#F8F8F8] border border-[#202020]/12 text-[13.5px] text-black placeholder:text-black/45 focus:outline-none focus:border-[#337418]"
+              className="w-full px-3.5 py-2.5 rounded-xl bg-white/55 border border-white/80 text-[13.5px] text-black placeholder:text-black/45 focus:outline-none focus:border-[#2E4F6B]"
             />
           </div>
           <div className="flex justify-end gap-2.5 pt-2">
@@ -449,7 +449,7 @@ export function PipelineView({
                   onChange={(e) =>
                     setEditingLead({ ...editingLead, stage: e.target.value as LeadStage })
                   }
-                  className="w-full min-h-[40px] px-3 py-2 rounded-xl bg-[#F8F8F8] border border-[#202020]/12 text-[13.5px] text-black"
+                  className="w-full min-h-[40px] px-3 py-2 rounded-xl bg-white/55 border border-white/80 text-[13.5px] text-black"
                 >
                   {PIPELINE_STAGES.map((s) => (
                     <option key={s} value={s}>
@@ -468,7 +468,7 @@ export function PipelineView({
                   onChange={(e) =>
                     setEditingLead({ ...editingLead, deal_value: Number(e.target.value) })
                   }
-                  className="w-full min-h-[40px] px-3.5 py-2 rounded-xl bg-[#F8F8F8] border border-[#202020]/12 text-[13.5px] text-black tabular-nums"
+                  className="w-full min-h-[40px] px-3.5 py-2 rounded-xl bg-white/55 border border-white/80 text-[13.5px] text-black tabular-nums"
                 />
               </div>
             </div>
@@ -477,7 +477,7 @@ export function PipelineView({
               <select
                 value={editingLead.owner_id || ''}
                 onChange={(e) => setEditingLead({ ...editingLead, owner_id: e.target.value })}
-                className="w-full min-h-[40px] px-3 py-2 rounded-xl bg-[#F8F8F8] border border-[#202020]/12 text-[13.5px] text-black"
+                className="w-full min-h-[40px] px-3 py-2 rounded-xl bg-white/55 border border-white/80 text-[13.5px] text-black"
               >
                 {employees.map((emp) => (
                   <option key={emp.id} value={emp.id}>
@@ -492,7 +492,7 @@ export function PipelineView({
                 <input
                   value={editingLead.email}
                   onChange={(e) => setEditingLead({ ...editingLead, email: e.target.value })}
-                  className="w-full min-h-[40px] px-3.5 py-2 rounded-xl bg-[#F8F8F8] border border-[#202020]/12 text-[13.5px] text-black"
+                  className="w-full min-h-[40px] px-3.5 py-2 rounded-xl bg-white/55 border border-white/80 text-[13.5px] text-black"
                 />
               </div>
               <div>
@@ -500,7 +500,7 @@ export function PipelineView({
                 <input
                   value={editingLead.phone}
                   onChange={(e) => setEditingLead({ ...editingLead, phone: e.target.value })}
-                  className="w-full min-h-[40px] px-3.5 py-2 rounded-xl bg-[#F8F8F8] border border-[#202020]/12 text-[13.5px] text-black"
+                  className="w-full min-h-[40px] px-3.5 py-2 rounded-xl bg-white/55 border border-white/80 text-[13.5px] text-black"
                 />
               </div>
             </div>
@@ -510,11 +510,11 @@ export function PipelineView({
                 rows={4}
                 value={editingLead.notes}
                 onChange={(e) => setEditingLead({ ...editingLead, notes: e.target.value })}
-                className="w-full px-3.5 py-2.5 rounded-xl bg-[#F8F8F8] border border-[#202020]/12 text-[13.5px] text-black"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-white/55 border border-white/80 text-[13.5px] text-black"
               />
             </div>
 
-            <div className="flex items-center justify-between gap-2 pt-3 border-t border-[#202020]/10">
+            <div className="flex items-center justify-between gap-2 pt-3 border-t border-[#08131F]/10">
               <GlassButton
                 variant="danger"
                 size="sm"

@@ -18,7 +18,7 @@ const ALL_MOBILE_ITEMS: Array<{
   icon: React.ComponentType<{ className?: string }>;
 }> = [
   { id: 'overview', label: 'Overview', icon: LayoutGrid },
-  { id: 'meta', label: 'Chats', icon: MessageSquareText },
+  { id: 'meta', label: 'Inbox', icon: MessageSquareText },
   { id: 'pipeline', label: 'Pipeline', icon: Kanban },
   { id: 'hrms', label: 'HRMS', icon: UserCheck },
   { id: 'organization', label: 'Team', icon: Building2 },
@@ -37,16 +37,16 @@ export function MobileNav({
 
   return (
     <motion.nav
-      aria-label="Mobile Sticky Footer Navigation"
-      initial={{ y: 24, opacity: 0 }}
+      aria-label="Mobile Sticky Navigation"
+      initial={{ y: 20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ type: 'spring', stiffness: 360, damping: 30 }}
-      className="lg:hidden fixed bottom-0 inset-x-0 z-40 px-2.5 pt-1 pb-[max(0.5rem,env(safe-area-inset-bottom))] pointer-events-none"
+      className="lg:hidden fixed bottom-0 inset-x-0 z-40 px-3 pt-1 pb-[max(0.5rem,env(safe-area-inset-bottom))] pointer-events-none"
     >
       <div
-        className={`pointer-events-auto glass-sheet rounded-2xl px-1 py-1 grid ${
+        className={`pointer-events-auto glass-sheet rounded-full px-1.5 py-1 grid ${
           items.length === 5 ? 'grid-cols-5' : 'grid-cols-4'
-        } gap-0.5 max-w-lg mx-auto`}
+        } gap-0.5 max-w-md mx-auto`}
       >
         {items.map((item) => {
           const Icon = item.icon;
@@ -66,23 +66,27 @@ export function MobileNav({
                 triggerHaptic('selection');
                 onSelectTab(item.id);
               }}
-              className={`relative min-h-[46px] px-1 py-1 rounded-xl flex flex-col items-center justify-center gap-0.5 whitespace-nowrap shrink-0 text-[11px] font-medium transition-colors duration-150 cursor-pointer ${
-                active ? 'text-[#F8F8F8]' : 'text-black/75 hover:text-black'
+              className={`relative min-h-[44px] px-1 py-1 rounded-full flex flex-col items-center justify-center gap-0.5 whitespace-nowrap shrink-0 text-[10.5px] font-medium transition-colors duration-150 cursor-pointer ${
+                active ? 'text-[#E8EFF3]' : 'text-[#08131F]/70 hover:text-[#08131F]'
               }`}
             >
               {active && (
                 <motion.span
                   layoutId="mobile-tab-liquid-pill"
                   transition={{ type: 'spring', stiffness: 420, damping: 34, mass: 0.8 }}
-                  className="absolute inset-0 -z-10 rounded-xl bg-[#0F0F0F] border border-[#5DD62C]/35 shadow-[0_6px_16px_-4px_rgba(15,15,15,0.34)]"
+                  className="absolute inset-0 -z-10 rounded-full bg-[#08131F]/92 border border-white/20 shadow-[0_6px_16px_-4px_rgba(8,19,31,0.34)]"
                 />
               )}
               <span className="relative inline-flex items-center justify-center">
-                <Icon className={`w-4 h-4 shrink-0 ${active ? 'text-[#5DD62C]' : ''}`} />
+                <Icon
+                  className={`w-4 h-4 shrink-0 ${
+                    active ? 'text-[#E8EFF3]' : 'text-[#2E4F6B]'
+                  }`}
+                />
                 {badgeCount > 0 && (
                   <span
-                    className={`ml-1 tabular-nums text-[10px] font-semibold ${
-                      active ? 'text-[#5DD62C]' : 'text-[#337418]'
+                    className={`ml-1 tabular-nums text-[9.5px] font-semibold ${
+                      active ? 'text-[#A9BDC9]' : 'text-[#16314A]'
                     }`}
                   >
                     {badgeCount}

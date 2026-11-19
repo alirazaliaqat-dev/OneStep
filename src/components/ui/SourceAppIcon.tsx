@@ -54,15 +54,15 @@ export function SourceAppIcon({
 
   const surfaceClass: Record<SourceAppType, string> = {
     Facebook:
-      'bg-[#334DAF] text-[#F8F8F8] shadow-[0_4px_10px_-3px_rgba(51,77,175,0.35),inset_0_1px_0_rgba(255,255,255,0.28)]',
+      'bg-[#2E4F6B] text-[#E8EFF3] shadow-[0_4px_10px_-3px_rgba(8,19,31,0.3),inset_0_1px_0_rgba(255,255,255,0.28)]',
     Instagram:
-      'bg-[#202020] text-[#5DD62C] border border-[#5DD62C]/35 shadow-[0_4px_10px_-3px_rgba(15,15,15,0.35),inset_0_1px_0_rgba(255,255,255,0.2)]',
+      'bg-[#16314A] text-[#E8EFF3] border border-white/25 shadow-[0_4px_10px_-3px_rgba(8,19,31,0.3),inset_0_1px_0_rgba(255,255,255,0.24)]',
     Messenger:
-      'bg-[#334DAF] text-[#F8F8F8] border border-white/25 shadow-[0_4px_10px_-3px_rgba(51,77,175,0.35),inset_0_1px_0_rgba(255,255,255,0.28)]',
+      'bg-[#5F7F98] text-[#E8EFF3] border border-white/30 shadow-[0_4px_10px_-3px_rgba(8,19,31,0.26),inset_0_1px_0_rgba(255,255,255,0.3)]',
     TikTok:
-      'bg-[#0F0F0F] text-[#F8F8F8] border border-[#5DD62C]/40 shadow-[0_4px_10px_-3px_rgba(15,15,15,0.38),inset_0_1px_0_rgba(255,255,255,0.22)]',
+      'bg-[#08131F] text-[#E8EFF3] border border-white/25 shadow-[0_4px_10px_-3px_rgba(8,19,31,0.36),inset_0_1px_0_rgba(255,255,255,0.22)]',
     Direct:
-      'bg-[#F8F8F8] text-black border border-[#202020]/12',
+      'bg-white/60 text-[#08131F] border border-white/80',
   };
 
   const renderGlyph = () => {

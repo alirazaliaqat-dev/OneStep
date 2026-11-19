@@ -73,12 +73,12 @@ export function WorkspaceSettingsDrawer({
         {/* Active Role Access Switcher */}
         <section className="glass-panel-subtle rounded-2xl p-5 space-y-3">
           <div className="flex items-start gap-3">
-            <span className="w-9 h-9 rounded-xl bg-[#5DD62C]/20 border border-[#337418]/20 text-[#0F0F0F] inline-flex items-center justify-center shrink-0">
+            <span className="w-9 h-9 rounded-full bg-[#08131F]/8 border border-white/75 text-[#16314A] inline-flex items-center justify-center shrink-0">
               <ShieldCheck className="w-4 h-4" />
             </span>
             <div className="flex-1 min-w-0">
-              <h3 className="text-[14.5px] font-semibold text-black">Active Access Role</h3>
-              <p className="text-[12.5px] text-black/65 mt-0.5">
+              <h3 className="text-[14.5px] font-semibold text-[#08131F]">Active Access Role</h3>
+              <p className="text-[12.5px] text-[#08131F]/65 mt-0.5">
                 Preview sidebar navigation, inbox scope & reporting visibility per role.
               </p>
             </div>
@@ -90,7 +90,7 @@ export function WorkspaceSettingsDrawer({
               triggerHaptic('selection');
               onChangeActiveRole(e.target.value);
             }}
-            className="w-full min-h-[40px] px-3 py-2 rounded-xl bg-[#F8F8F8] border border-[#202020]/12 text-[13.5px] font-medium text-black focus:outline-none focus:border-[#337418]"
+            className="w-full min-h-[40px] px-3.5 py-2 rounded-xl bg-white/55 border border-white/80 text-[13.5px] font-medium text-[#08131F] focus:outline-none focus:border-[#2E4F6B]"
           >
             {roles.map((r) => (
               <option key={r.id} value={r.id}>
@@ -113,13 +113,13 @@ export function WorkspaceSettingsDrawer({
                       : 'Facebook, Instagram & Messenger · Graph API v21.0'}
                   </p>
                 </div>
-                <span className={`text-[12px] font-semibold whitespace-nowrap ${isMetaConnected ? 'text-[#337418]' : 'text-black'}`}>
+                <span className={`text-[12px] font-semibold whitespace-nowrap ${isMetaConnected ? 'text-[#2E4F6B]' : 'text-[#08131F]/65'}`}>
                   {isMetaConnected ? 'Live Sync' : 'Ready to Link'}
                 </span>
               </div>
 
               {isMetaConnected && metaStatus?.connection ? (
-                <div className="space-y-2 text-[13px] text-black pt-2 border-t border-[#202020]/10">
+                <div className="space-y-2 text-[13px] text-[#08131F] pt-2 border-t border-[#08131F]/10">
                   <div className="flex justify-between gap-2">
                     <span className="text-black/60">Ad Account</span>
                     <span className="font-medium tabular-nums">{metaStatus.connection.adAccountId}</span>
@@ -203,7 +203,7 @@ export function WorkspaceSettingsDrawer({
                       : 'TikTok Direct Messages & Spark Lead Forms'}
                   </p>
                 </div>
-                <span className={`text-[12px] font-semibold whitespace-nowrap ${isTikTokConnected ? 'text-[#337418]' : 'text-black'}`}>
+                <span className={`text-[12px] font-semibold whitespace-nowrap ${isTikTokConnected ? 'text-[#2E4F6B]' : 'text-[#08131F]/65'}`}>
                   {isTikTokConnected ? 'Live Sync' : 'Ready to Link'}
                 </span>
               </div>
@@ -297,7 +297,7 @@ export function WorkspaceSettingsDrawer({
                         <span>{copiedField === endpoint.label ? 'Copied' : 'Copy'}</span>
                       </button>
                     </div>
-                    <div className="px-3 py-2 rounded-xl bg-[#F8F8F8] border border-[#202020]/12 text-[12px] text-black break-all select-all">
+                    <div className="px-3 py-2 rounded-xl bg-white/55 border border-white/80 text-[12px] text-[#08131F] break-all select-all">
                       {endpoint.value}
                     </div>
                   </div>
@@ -311,7 +311,7 @@ export function WorkspaceSettingsDrawer({
         <section className="glass-panel-subtle rounded-2xl p-5 space-y-3">
           <div className="flex items-center justify-between gap-4">
             <div className="flex items-start gap-3">
-              <span className="w-9 h-9 rounded-xl bg-[#5DD62C]/20 border border-[#337418]/20 text-[#0F0F0F] inline-flex items-center justify-center shrink-0">
+              <span className="w-9 h-9 rounded-full bg-[#08131F]/8 border border-white/75 text-[#16314A] inline-flex items-center justify-center shrink-0">
                 <Smartphone className="w-4 h-4" />
               </span>
               <div>

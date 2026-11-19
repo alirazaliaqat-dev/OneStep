@@ -72,10 +72,8 @@ export function WhatsAppInbox({
   onUpdateQueryStatus,
   onSendReply,
   onConvertToLead,
-  onInspectFullThread,
   onOpenFullInbox,
-  title = 'Omnichannel Chats',
-  subtitle,
+  title = 'Chats',
   compact = false,
   showPlatformFilter = true,
   layoutIdPrefix = 'wa-inbox',
@@ -169,20 +167,19 @@ export function WhatsAppInbox({
     }
   };
 
-  const chatHeightClass = compact ? 'h-[500px] lg:h-[520px]' : 'h-[560px] lg:h-[600px]';
+  const chatHeightClass = compact ? 'h-[470px] lg:h-[500px]' : 'h-[560px] lg:h-[600px]';
 
   return (
-    <div className="glass-panel rounded-3xl overflow-hidden flex flex-col">
-      {/* Top Omnichannel Filter Bar */}
-      <div className="px-4 sm:px-5 py-3.5 border-b border-[#202020]/10 flex flex-col lg:flex-row lg:items-center justify-between gap-3">
-        <div className="min-w-0">
-          <AppearHeading as="h2" className="text-[16px] md:text-[17px] font-semibold text-black truncate">
+    <div className="glass-panel rounded-[28px] overflow-hidden flex flex-col text-[#08131F]">
+      {/* Calm Single-Row Filter Bar */}
+      <div className="px-5 py-3.5 border-b border-white/55 flex flex-wrap items-center justify-between gap-3">
+        <div className="flex items-center gap-3 min-w-0">
+          <AppearHeading as="h2" className="text-[15.5px] font-semibold text-[#08131F] whitespace-nowrap">
             {title}
           </AppearHeading>
-          <p className="text-[12px] sm:text-[12.5px] text-black/65 mt-0.5 truncate">
-            {subtitle ||
-              `Facebook · Instagram · Messenger · TikTok (${visibleQueries.length} active)`}
-          </p>
+          <span className="text-[12.5px] text-[#08131F]/55 tabular-nums whitespace-nowrap">
+            {visibleQueries.length} active
+          </span>
         </div>
 
         <div className="flex flex-wrap items-center gap-2 shrink-0 max-w-full">
@@ -200,25 +197,21 @@ export function WhatsAppInbox({
                 {
                   value: 'Facebook',
                   label: 'Facebook',
-                  count: platformCounts.Facebook,
                   icon: <SourceAppIcon app="Facebook" size="xs" />,
                 },
                 {
                   value: 'Instagram',
                   label: 'Instagram',
-                  count: platformCounts.Instagram,
                   icon: <SourceAppIcon app="Instagram" size="xs" />,
                 },
                 {
                   value: 'Messenger',
                   label: 'Messenger',
-                  count: platformCounts.Messenger,
                   icon: <SourceAppIcon app="Messenger" size="xs" />,
                 },
                 {
                   value: 'TikTok',
                   label: 'TikTok',
-                  count: platformCounts.TikTok,
                   icon: <SourceAppIcon app="TikTok" size="xs" />,
                 },
               ]}
@@ -227,34 +220,26 @@ export function WhatsAppInbox({
 
           {onOpenFullInbox && (
             <GlassButton variant="secondary" size="sm" onClick={onOpenFullInbox}>
-              <span>Full Inbox</span>
+              <span>All Inbox</span>
             </GlassButton>
           )}
         </div>
       </div>
 
-      {/* WhatsApp Responsive Split Pane (Mobile Master <-> Chat Switch, Desktop Side-by-Side) */}
+      {/* WhatsApp Responsive Split Pane */}
       <div className={`grid grid-cols-1 lg:grid-cols-12 ${chatHeightClass} min-h-0`}>
-        {/* Left: WhatsApp Chats List */}
+        {/* Left: Clean Chats List */}
         <div
-          className={`lg:col-span-5 border-b lg:border-b-0 lg:border-r border-[#202020]/10 flex flex-col min-h-0 h-full bg-[#F8F8F8]/55 ${
+          className={`lg:col-span-5 border-b lg:border-b-0 lg:border-r border-white/55 flex flex-col min-h-0 h-full bg-white/15 ${
             mobileShowChat && activeQuery ? 'hidden lg:flex' : 'flex'
           }`}
         >
-          <div className="px-4 py-2.5 border-b border-[#202020]/8 flex items-center justify-between text-[12px] text-black/65 shrink-0">
-            <span className="font-semibold text-black">Chats ({visibleQueries.length})</span>
-            <span className="inline-flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-[#5DD62C]" />
-              <span>Meta & TikTok Live</span>
-            </span>
-          </div>
-
           {visibleQueries.length === 0 ? (
-            <div className="p-8 text-center text-[13px] text-black/65 my-auto">
-              No chats match this filter in your {activeRoleName} scope.
+            <div className="p-8 text-center text-[13px] text-[#08131F]/60 my-auto">
+              No chats in this channel.
             </div>
           ) : (
-            <div className="divide-y divide-[#202020]/8 flex-1 min-h-0 overflow-y-auto">
+            <div className="divide-y divide-white/45 flex-1 min-h-0 overflow-y-auto">
               {visibleQueries.map((qry, index) => {
                 const selected = activeQuery?.id === qry.id;
                 const lastMsg = getLastMessage(qry);
@@ -266,26 +251,26 @@ export function WhatsAppInbox({
                   <motion.button
                     key={qry.id}
                     type="button"
-                    initial={{ opacity: 0, y: 6 }}
+                    initial={{ opacity: 0, y: 4 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.2, delay: Math.min(index * 0.03, 0.24) }}
+                    transition={{ duration: 0.18, delay: Math.min(index * 0.025, 0.2) }}
                     onClick={() => {
                       triggerHaptic('selection');
                       onSelectQueryId(qry.id);
                       setMobileShowChat(true);
                     }}
-                    className={`w-full text-left px-3.5 py-3 transition-colors cursor-pointer flex items-center gap-3 ${
+                    className={`w-full text-left px-4 py-3.5 transition-colors cursor-pointer flex items-center gap-3 ${
                       selected
-                        ? 'bg-[#5DD62C]/14'
-                        : 'hover:bg-white/75 active:bg-[#5DD62C]/10'
+                        ? 'bg-white/55'
+                        : 'hover:bg-white/30 active:bg-white/45'
                     }`}
                   >
-                    {/* 44px WhatsApp Avatar + Corner Source App Icon */}
+                    {/* Avatar + Source App Badge */}
                     <div className="relative shrink-0">
-                      <span className="w-11 h-11 rounded-full bg-white border border-[#202020]/12 text-black text-[13px] font-semibold inline-flex items-center justify-center shadow-[inset_0_1px_0_rgba(255,255,255,0.95)]">
+                      <span className="w-10 h-10 rounded-full bg-white/65 border border-white/85 text-[#08131F] text-[12.5px] font-semibold inline-flex items-center justify-center">
                         {getInitials(qry.customer_name)}
                       </span>
-                      <span className="absolute -bottom-0.5 -right-0.5 rounded-[6px] ring-2 ring-[#F8F8F8]">
+                      <span className="absolute -bottom-0.5 -right-0.5 rounded-[5px] ring-2 ring-[#E8EFF3]">
                         <SourceAppIcon
                           platform={qry.platform}
                           channel={qry.channel}
@@ -294,15 +279,15 @@ export function WhatsAppInbox({
                       </span>
                     </div>
 
-                    {/* Name, Timestamp, Last Message Preview & Unread Badge */}
-                    <div className="min-w-0 flex-1 space-y-1">
+                    {/* Name, Timestamp & Preview */}
+                    <div className="min-w-0 flex-1 space-y-0.5">
                       <div className="flex items-center justify-between gap-2">
-                        <span className="text-[14px] font-semibold text-black truncate">
+                        <span className="text-[13.5px] font-semibold text-[#08131F] truncate">
                           {qry.customer_name}
                         </span>
                         <span
                           className={`text-[11px] tabular-nums shrink-0 ${
-                            isUnread ? 'text-[#337418] font-semibold' : 'text-black/55'
+                            isUnread ? 'text-[#16314A] font-semibold' : 'text-[#08131F]/50'
                           }`}
                         >
                           {formatRelativeTime(qry.updated_at)}
@@ -310,20 +295,16 @@ export function WhatsAppInbox({
                       </div>
 
                       <div className="flex items-center justify-between gap-2">
-                        <p className="text-[12.5px] text-black/70 truncate flex items-center gap-1 min-w-0">
+                        <p className="text-[12.5px] text-[#08131F]/65 truncate flex items-center gap-1 min-w-0">
                           {lastIsAgent && (
-                            <CheckCheck className="w-3.5 h-3.5 text-[#337418] shrink-0" />
+                            <CheckCheck className="w-3.5 h-3.5 text-[#2E4F6B] shrink-0" />
                           )}
                           <span className="truncate">{preview}</span>
                         </p>
 
-                        {isUnread ? (
-                          <span className="min-w-[20px] h-5 px-1.5 rounded-full bg-[#5DD62C] text-[#0F0F0F] text-[11px] font-bold inline-flex items-center justify-center tabular-nums shrink-0 shadow-xs">
+                        {isUnread && (
+                          <span className="min-w-[18px] h-[18px] px-1 rounded-full bg-[#08131F] text-[#E8EFF3] text-[10.5px] font-semibold inline-flex items-center justify-center tabular-nums shrink-0">
                             1
-                          </span>
-                        ) : (
-                          <span className="text-[11px] text-black/50 whitespace-nowrap shrink-0">
-                            {qry.assigned_employee_name?.split(' ')[0] || 'Open'}
                           </span>
                         )}
                       </div>
@@ -335,7 +316,7 @@ export function WhatsAppInbox({
           )}
         </div>
 
-        {/* Right: Authentic WhatsApp Chat View */}
+        {/* Right: Clean WhatsApp Chat Experience */}
         <div
           className={`lg:col-span-7 flex flex-col min-h-0 h-full ${
             !mobileShowChat && activeQuery ? 'hidden lg:flex' : 'flex'
@@ -343,8 +324,8 @@ export function WhatsAppInbox({
         >
           {activeQuery ? (
             <>
-              {/* WhatsApp Chat Top Bar */}
-              <div className="px-3 sm:px-4 py-2.5 border-b border-[#202020]/10 bg-white/80 backdrop-blur-xl flex items-center justify-between gap-2 shrink-0">
+              {/* Clean Single-Row Chat Header */}
+              <div className="px-4 py-3 border-b border-white/55 bg-white/30 backdrop-blur-md flex items-center justify-between gap-2 shrink-0">
                 <div className="flex items-center gap-2.5 min-w-0 flex-1">
                   <button
                     type="button"
@@ -353,7 +334,7 @@ export function WhatsAppInbox({
                       triggerHaptic('light');
                       setMobileShowChat(false);
                     }}
-                    className="lg:hidden min-w-[38px] min-h-[38px] rounded-full bg-[#F8F8F8] border border-[#202020]/10 hover:bg-white text-black inline-flex items-center justify-center shrink-0 cursor-pointer active:scale-95 transition-transform"
+                    className="lg:hidden w-9 h-9 rounded-full bg-white/55 border border-white/80 text-[#08131F] inline-flex items-center justify-center shrink-0 cursor-pointer"
                   >
                     <ArrowLeft className="w-4 h-4" />
                   </button>
@@ -367,10 +348,10 @@ export function WhatsAppInbox({
                     className="flex items-center gap-2.5 min-w-0 flex-1 text-left cursor-pointer group"
                   >
                     <div className="relative shrink-0">
-                      <span className="w-10 h-10 rounded-full bg-[#F8F8F8] border border-[#202020]/12 text-black text-[12.5px] font-semibold inline-flex items-center justify-center">
+                      <span className="w-9 h-9 rounded-full bg-white/70 border border-white/85 text-[#08131F] text-[12px] font-semibold inline-flex items-center justify-center">
                         {getInitials(activeQuery.customer_name)}
                       </span>
-                      <span className="absolute -bottom-0.5 -right-0.5 rounded-[5px] ring-2 ring-white">
+                      <span className="absolute -bottom-0.5 -right-0.5 rounded-[5px] ring-2 ring-[#E8EFF3]">
                         <SourceAppIcon
                           platform={activeQuery.platform}
                           channel={activeQuery.channel}
@@ -380,21 +361,17 @@ export function WhatsAppInbox({
                     </div>
 
                     <div className="min-w-0 flex-1">
-                      <h3 className="text-[14.5px] font-semibold text-black truncate group-hover:underline">
+                      <h3 className="text-[14px] font-semibold text-[#08131F] truncate group-hover:underline">
                         {activeQuery.customer_name}
                       </h3>
-                      <p className="text-[11.5px] text-black/65 truncate flex items-center gap-1.5">
-                        <span className="w-2 h-2 rounded-full bg-[#5DD62C] shrink-0" />
-                        <span className="truncate">
-                          online · {activeQuery.channel} ·{' '}
-                          {activeQuery.assigned_employee_name || 'Unassigned'}
-                        </span>
+                      <p className="text-[11.5px] text-[#08131F]/60 truncate">
+                        {activeQuery.channel} · {activeQuery.assigned_employee_name || 'Unassigned'} · {activeQuery.status}
                       </p>
                     </div>
                   </button>
                 </div>
 
-                {/* Compact Right Header Actions (Always Single-Line) */}
+                {/* Minimal Header Actions */}
                 <div className="flex items-center gap-1.5 shrink-0">
                   {onConvertToLead && permissions.modifications.manageDeals && (
                     <GlassButton
@@ -418,26 +395,15 @@ export function WhatsAppInbox({
                     >
                       {activeQuery.status === 'Resolved' ? (
                         <>
-                          <CheckCircle2 className="w-3.5 h-3.5 shrink-0 text-[#5DD62C]" />
+                          <CheckCircle2 className="w-3.5 h-3.5 shrink-0 text-[#A9BDC9]" />
                           <span>Converted</span>
                         </>
                       ) : (
                         <>
-                          <BriefcaseBusiness className="w-3.5 h-3.5 shrink-0 text-[#5DD62C]" />
-                          <span>Convert Deal</span>
+                          <BriefcaseBusiness className="w-3.5 h-3.5 shrink-0 text-[#A9BDC9]" />
+                          <span>Convert</span>
                         </>
                       )}
-                    </GlassButton>
-                  )}
-
-                  {onInspectFullThread && (
-                    <GlassButton
-                      variant="ghost"
-                      size="sm"
-                      className="hidden xl:inline-flex"
-                      onClick={() => onInspectFullThread(activeQuery.id)}
-                    >
-                      <span>Open Thread</span>
                     </GlassButton>
                   )}
 
@@ -447,27 +413,17 @@ export function WhatsAppInbox({
                     aria-label="Chat details and assignment"
                     onClick={() => setDetailsOpen(true)}
                   >
-                    <Info className="w-3.5 h-3.5 shrink-0" />
+                    <Info className="w-3.5 h-3.5 shrink-0 text-[#2E4F6B]" />
                     <span>Details</span>
                   </GlassButton>
                 </div>
               </div>
 
-              {/* Subtle Context Strip for Attribution & Status */}
-              <div className="px-3.5 sm:px-4 py-1.5 border-b border-[#202020]/8 bg-[#F8F8F8]/95 flex items-center justify-between gap-2 text-[11.5px] text-black/75 shrink-0">
-                <span className="truncate font-medium">
-                  {activeQuery.subject} · {activeQuery.ad_creative_name || activeQuery.platform}
-                </span>
-                <span className="shrink-0 font-semibold text-[#337418] tabular-nums">
-                  {activeQuery.status}
-                </span>
-              </div>
-
-              {/* WhatsApp Wallpaper Chat Canvas */}
-              <div className="flex-1 min-h-0 overflow-y-auto whatsapp-wallpaper px-3 sm:px-5 py-4 space-y-2.5">
+              {/* Serene Translucent Message Canvas */}
+              <div className="flex-1 min-h-0 overflow-y-auto whatsapp-wallpaper px-4 sm:px-5 py-4 space-y-2.5">
                 <div className="flex justify-center pb-1">
-                  <span className="px-3 py-1 rounded-full bg-white/92 border border-[#202020]/10 text-[11px] font-medium text-black/65 shadow-xs">
-                    Today · {activeQuery.platform} {activeQuery.channel}
+                  <span className="text-[11px] font-medium text-[#08131F]/55">
+                    {activeQuery.platform} · {activeQuery.ad_creative_name || activeQuery.subject}
                   </span>
                 </div>
 
@@ -476,25 +432,22 @@ export function WhatsAppInbox({
                   return (
                     <motion.div
                       key={msg.id}
-                      initial={{ opacity: 0, y: 8, scale: 0.96 }}
+                      initial={{ opacity: 0, y: 6, scale: 0.98 }}
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       transition={{ type: 'spring', stiffness: 400, damping: 28 }}
                       className={`flex ${isAgent ? 'justify-end' : 'justify-start'}`}
                     >
                       <div
-                        className={`max-w-[84%] sm:max-w-[74%] px-3.5 py-2 text-[13.5px] leading-snug text-black shadow-[0_2px_8px_-2px_rgba(15,15,15,0.08)] ${
+                        className={`max-w-[82%] sm:max-w-[74%] px-3.5 py-2.5 text-[13.5px] leading-snug text-[#08131F] backdrop-blur-md ${
                           isAgent
-                            ? 'bg-[#5DD62C]/18 border border-[#337418]/28 rounded-2xl rounded-tr-[4px]'
-                            : 'bg-white/95 border border-[#202020]/10 rounded-2xl rounded-tl-[4px]'
+                            ? 'bg-[#2E4F6B]/16 border border-white/75 rounded-2xl rounded-tr-[4px]'
+                            : 'bg-white/72 border border-white/90 rounded-2xl rounded-tl-[4px]'
                         }`}
                       >
-                        <p className="text-[11px] font-semibold text-black/60 mb-0.5">
-                          {msg.author}
-                        </p>
-                        <p className="text-black break-words">{msg.body}</p>
-                        <div className="mt-1 flex items-center justify-end gap-1 text-[10.5px] text-black/55 tabular-nums">
+                        <p className="text-[#08131F] break-words">{msg.body}</p>
+                        <div className="mt-1 flex items-center justify-end gap-1 text-[10.5px] text-[#08131F]/50 tabular-nums">
                           <span>{formatBubbleClock(msg.timestamp)}</span>
-                          {isAgent && <CheckCheck className="w-3.5 h-3.5 text-[#337418]" />}
+                          {isAgent && <CheckCheck className="w-3.5 h-3.5 text-[#16314A]" />}
                         </div>
                       </div>
                     </motion.div>
@@ -511,7 +464,7 @@ export function WhatsAppInbox({
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 4 }}
                     transition={{ duration: 0.16 }}
-                    className="px-3 py-2 border-t border-[#202020]/10 bg-white/95 flex items-center gap-2 overflow-x-auto scrollbar-none shrink-0"
+                    className="px-3.5 py-2 border-t border-white/55 bg-white/45 backdrop-blur-md flex items-center gap-2 overflow-x-auto scrollbar-none shrink-0"
                   >
                     {QUICK_REPLIES.map((tpl) => (
                       <button
@@ -522,7 +475,7 @@ export function WhatsAppInbox({
                           setReplyDraft(tpl);
                           setQuickRepliesOpen(false);
                         }}
-                        className="px-3 py-1.5 rounded-full bg-[#F8F8F8] hover:bg-[#5DD62C]/20 border border-[#202020]/12 text-[12px] font-medium text-black whitespace-nowrap shrink-0 cursor-pointer"
+                        className="px-3 py-1.5 rounded-full bg-white/65 hover:bg-white/90 border border-white/85 text-[12px] font-medium text-[#08131F] whitespace-nowrap shrink-0 cursor-pointer"
                       >
                         {tpl}
                       </button>
@@ -531,10 +484,10 @@ export function WhatsAppInbox({
                 )}
               </AnimatePresence>
 
-              {/* WhatsApp Bottom Pill Composer */}
+              {/* WhatsApp Pill Composer */}
               <form
                 onSubmit={handleSend}
-                className="px-3 py-2.5 border-t border-[#202020]/10 bg-white/90 backdrop-blur-xl flex items-center gap-2 shrink-0"
+                className="px-3.5 py-2.5 border-t border-white/55 bg-white/30 backdrop-blur-md flex items-center gap-2 shrink-0"
               >
                 <button
                   type="button"
@@ -544,10 +497,10 @@ export function WhatsAppInbox({
                     triggerHaptic('selection');
                     setQuickRepliesOpen((v) => !v);
                   }}
-                  className={`w-10 h-10 rounded-full inline-flex items-center justify-center shrink-0 cursor-pointer transition-colors disabled:opacity-40 ${
+                  className={`w-9 h-9 rounded-full inline-flex items-center justify-center shrink-0 cursor-pointer transition-colors disabled:opacity-40 ${
                     quickRepliesOpen
-                      ? 'bg-[#0F0F0F] text-[#5DD62C]'
-                      : 'bg-[#F8F8F8] border border-[#202020]/12 text-black hover:bg-[#5DD62C]/20'
+                      ? 'bg-[#08131F] text-[#E8EFF3]'
+                      : 'bg-white/55 border border-white/80 text-[#2E4F6B] hover:bg-white/80'
                   }`}
                 >
                   <Zap className="w-4 h-4" />
@@ -562,8 +515,8 @@ export function WhatsAppInbox({
                   disabled={!permissions.modifications.updateInquiries}
                   value={replyDraft}
                   onChange={(e) => setReplyDraft(e.target.value)}
-                  placeholder={`Message ${activeQuery.customer_name} on ${activeQuery.channel}...`}
-                  className="flex-1 min-w-0 min-h-[40px] px-4 py-2 rounded-full bg-[#F8F8F8] border border-[#202020]/12 text-[13.5px] text-black placeholder:text-black/45 focus:outline-none focus:border-[#337418]"
+                  placeholder={`Message ${activeQuery.customer_name}...`}
+                  className="flex-1 min-w-0 min-h-[38px] px-4 py-1.5 rounded-full bg-white/60 border border-white/85 text-[13.5px] text-[#08131F] placeholder:text-[#08131F]/45 focus:outline-none focus:bg-white/85 focus:border-[#2E4F6B]"
                 />
 
                 <motion.button
@@ -576,21 +529,21 @@ export function WhatsAppInbox({
                     !permissions.modifications.updateInquiries
                   }
                   onClick={() => triggerHaptic('success')}
-                  className="w-10 h-10 rounded-full bg-[#337418] hover:bg-[#5DD62C] text-[#F8F8F8] hover:text-[#0F0F0F] inline-flex items-center justify-center shrink-0 cursor-pointer disabled:opacity-45 shadow-[0_6px_14px_-4px_rgba(51,116,24,0.42)] transition-colors"
+                  className="w-9 h-9 rounded-full bg-[#08131F] hover:bg-[#16314A] text-[#E8EFF3] inline-flex items-center justify-center shrink-0 cursor-pointer disabled:opacity-40 shadow-[0_6px_14px_-4px_rgba(8,19,31,0.36)] transition-colors"
                 >
-                  <Send className="w-4 h-4" />
+                  <Send className="w-3.5 h-3.5" />
                 </motion.button>
               </form>
             </>
           ) : (
-            <div className="p-10 text-center text-[13.5px] text-black/65 my-auto">
-              Select a conversation on the left to start chatting in real time.
+            <div className="p-10 text-center text-[13.5px] text-[#08131F]/55 my-auto">
+              Select a chat to reply.
             </div>
           )}
         </div>
       </div>
 
-      {/* Chat Info, Attribution, Specialist Assignment & Deal Conversion Drawer */}
+      {/* Chat Info & Assignment Drawer */}
       <SlideDrawer
         open={detailsOpen && Boolean(activeQuery)}
         onClose={() => setDetailsOpen(false)}
@@ -598,7 +551,7 @@ export function WhatsAppInbox({
         subtitle={activeQuery ? `${activeQuery.platform} · ${activeQuery.channel}` : undefined}
       >
         {activeQuery && (
-          <div className="space-y-5 text-black">
+          <div className="space-y-5 text-[#08131F]">
             <section className="glass-panel-subtle rounded-2xl p-4 space-y-2.5">
               <div className="flex items-center gap-3">
                 <SourceAppIcon
@@ -607,55 +560,55 @@ export function WhatsAppInbox({
                   size="md"
                 />
                 <div className="min-w-0">
-                  <h3 className="text-[15px] font-semibold text-black truncate">
+                  <h3 className="text-[15px] font-semibold text-[#08131F] truncate">
                     {activeQuery.customer_name}
                   </h3>
-                  <p className="text-[12.5px] text-black/65 truncate">
+                  <p className="text-[12.5px] text-[#08131F]/60 truncate">
                     {activeQuery.customer_handle}
                   </p>
                 </div>
               </div>
-              <div className="pt-2 border-t border-[#202020]/10 space-y-1.5 text-[13px]">
+              <div className="pt-2 border-t border-[#08131F]/10 space-y-1.5 text-[13px]">
                 <div className="flex justify-between gap-2">
-                  <span className="text-black/60">Email</span>
-                  <span className="font-medium text-black truncate">
+                  <span className="text-[#08131F]/60">Email</span>
+                  <span className="font-medium truncate">
                     {activeQuery.customer_email || 'Not provided'}
                   </span>
                 </div>
                 <div className="flex justify-between gap-2">
-                  <span className="text-black/60">Phone</span>
-                  <span className="font-medium text-black tabular-nums">
+                  <span className="text-[#08131F]/60">Phone</span>
+                  <span className="font-medium tabular-nums">
                     {activeQuery.customer_phone || 'Not provided'}
                   </span>
                 </div>
                 <div className="flex justify-between gap-2">
-                  <span className="text-black/60">SLA Timer</span>
-                  <span className="font-semibold text-[#337418] tabular-nums">
+                  <span className="text-[#08131F]/60">SLA Timer</span>
+                  <span className="font-semibold text-[#2E4F6B] tabular-nums">
                     {formatSlaRemaining(activeQuery.sla_due_at, activeQuery.status)}
                   </span>
                 </div>
               </div>
             </section>
 
-            <section className="glass-panel-subtle rounded-2xl p-4 space-y-2">
-              <h4 className="text-[13.5px] font-semibold text-black">Ad Creative & Campaign</h4>
-              <p className="text-[13px] font-medium text-black">
+            <section className="glass-panel-subtle rounded-2xl p-4 space-y-1.5">
+              <h4 className="text-[13px] font-semibold text-[#08131F]">Ad Creative & Campaign</h4>
+              <p className="text-[13px] font-medium text-[#08131F]">
                 {activeQuery.ad_creative_name || 'Direct Channel Message'}
               </p>
-              <p className="text-[12.5px] text-black/65">
+              <p className="text-[12.5px] text-[#08131F]/60">
                 {activeQuery.campaign_name || activeQuery.platform} ·{' '}
                 {activeQuery.ad_creative_format || activeQuery.channel}
               </p>
             </section>
 
             <section className="glass-panel-subtle rounded-2xl p-4 space-y-3">
-              <h4 className="text-[13.5px] font-semibold text-black">Routing & Status</h4>
+              <h4 className="text-[13px] font-semibold text-[#08131F]">Routing & Status</h4>
               <div>
-                <label className="block text-[12px] font-medium text-black/65 mb-1">
+                <label className="block text-[12px] font-medium text-[#08131F]/65 mb-1">
                   Assigned Specialist
                 </label>
                 <div className="flex items-center gap-2">
-                  <UserPlus className="w-4 h-4 text-black/65 shrink-0" />
+                  <UserPlus className="w-4 h-4 text-[#2E4F6B] shrink-0" />
                   <select
                     aria-label="Assign chat specialist"
                     disabled={!permissions.modifications.assignTasks}
@@ -664,7 +617,7 @@ export function WhatsAppInbox({
                       triggerHaptic('medium');
                       onAssignQuery(activeQuery.id, e.target.value || null);
                     }}
-                    className="flex-1 min-h-[40px] px-3 py-2 rounded-xl bg-[#F8F8F8] border border-[#202020]/12 text-[13px] font-medium text-black disabled:opacity-60"
+                    className="flex-1 min-h-[38px] px-3 py-1.5 rounded-xl bg-white/60 border border-white/85 text-[13px] font-medium text-[#08131F] disabled:opacity-60"
                   >
                     <option value="">Unassigned</option>
                     {employees.map((emp) => (
@@ -677,8 +630,8 @@ export function WhatsAppInbox({
               </div>
 
               <div>
-                <label className="block text-[12px] font-medium text-black/65 mb-1">
-                  Conversation Status
+                <label className="block text-[12px] font-medium text-[#08131F]/65 mb-1">
+                  Status
                 </label>
                 <select
                   aria-label="Update chat status"
@@ -688,7 +641,7 @@ export function WhatsAppInbox({
                     triggerHaptic('selection');
                     onUpdateQueryStatus(activeQuery.id, e.target.value as QueryStatus);
                   }}
-                  className="w-full min-h-[40px] px-3 py-2 rounded-xl bg-[#F8F8F8] border border-[#202020]/12 text-[13px] font-medium text-black disabled:opacity-60"
+                  className="w-full min-h-[38px] px-3 py-1.5 rounded-xl bg-white/60 border border-white/85 text-[13px] font-medium text-[#08131F] disabled:opacity-60"
                 >
                   <option value="New">New</option>
                   <option value="In Progress">In Progress</option>
@@ -719,11 +672,11 @@ export function WhatsAppInbox({
                   }
                 }}
               >
-                <BriefcaseBusiness className="w-4 h-4 shrink-0 text-[#5DD62C]" />
+                <BriefcaseBusiness className="w-4 h-4 shrink-0 text-[#A9BDC9]" />
                 <span>
                   {activeQuery.status === 'Resolved'
-                    ? 'Already Converted to Deal'
-                    : 'Convert Chat to CRM Deal'}
+                    ? 'Already Converted'
+                    : 'Convert to CRM Deal'}
                 </span>
               </GlassButton>
             )}
